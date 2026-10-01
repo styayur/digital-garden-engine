@@ -1,15 +1,33 @@
+<div align="center">
+
+<img src="docs/assets/brand/logo-mark.svg" width="84" alt="Digital Garden Engine logo" />
+
 # Digital Garden Engine
 
-An open-source, static-first digital garden engine for essays, notes, projects and personal knowledge.
+**Static-first engine for personal knowledge publishing.**
 
-It is local-first, works with Markdown and MDX, produces a static website, and is designed around a clear publication boundary between public code and private content.
+[Documentation](#documentation) · [Releases](https://github.com/styayur/digital-garden-engine/releases) · [Issues](https://github.com/styayur/digital-garden-engine/issues)
 
-- **Live demo:** not claimed yet. The repository ships with a complete fictional demo that runs locally.
-- **Screenshot:** run `npm run dev` and open `http://localhost:3000`.
+[English](README.md) · [中文](README.zh-CN.md)
+
+[![release](https://img.shields.io/github/v/release/styayur/digital-garden-engine)](https://github.com/styayur/digital-garden-engine/releases/latest)
+[![CI](https://github.com/styayur/digital-garden-engine/actions/workflows/ci.yml/badge.svg)](https://github.com/styayur/digital-garden-engine/actions/workflows/ci.yml)
+[![license: GPL-3.0](https://img.shields.io/badge/license-GPL--3.0-blue)](LICENSE)
+[![Next.js](https://img.shields.io/badge/Next.js-black?logo=nextdotjs&logoColor=white)]()
+[![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=white)]()
+[![Cloudflare Pages](https://img.shields.io/badge/Cloudflare%20Pages-F6821F?logo=cloudflarepages&logoColor=white)]()
+
+![Digital Garden Engine local demo](docs/assets/demo.png)
+
+</div>
+
+**Status:** 🔵 Research
+
+An open-source, static-first digital garden engine for essays, notes, projects and personal knowledge. It is local-first, works with Markdown and MDX, produces a static website, and is designed around a clear publication boundary between public code and private content.
+
 - **Quick start:** jump to [Run the demo in five minutes](#run-the-demo-in-five-minutes).
 - **Documentation:** see the [documentation index](#documentation).
 - **License:** GNU General Public License v3.0 only. See [LICENSE](LICENSE).
-
 ## What it is
 
 - A local-first authoring system for Markdown and MDX.
@@ -442,6 +460,26 @@ It keeps private material away from a public repository and gives the public art
 **Wrangler:** Cloudflare's command-line deployment tool.
 **Custom domain:** a domain such as `garden.example.com`.
 **Rollback:** restoring a previous deployment or code version.
+
+## Roadmap
+
+### Current
+
+- Static-first MDX engine with a public-code/private-content boundary.
+- Cloudflare Pages direct-upload deployment path.
+
+### Next
+
+- Publish a live demo and harden the documentation index.
+- Document the pinned-engine upgrade path.
+
+### Future
+
+- A plugin/theme system and richer publication pipeline.
+
+### Not planned
+
+- SaaS hosting, user accounts, or analytics.
 
 ## Community
 
