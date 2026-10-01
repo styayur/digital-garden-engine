@@ -75,7 +75,7 @@ The engine can be cloned and used by anyone. The private content repository rema
 
 ## Run the demo in five minutes
 
-You need Git and Node.js 20.9 or newer. Git downloads the code. Node.js runs the website on your computer.
+You need Git and Node.js 22 or newer. Git downloads the code. Node.js runs the website on your computer.
 
 ### Windows PowerShell
 
@@ -115,7 +115,7 @@ Install Git from https://git-scm.com/downloads if the command is unavailable.
 
 ### Node.js
 
-Node.js runs the build tools. This project requires Node.js 20.9 or newer. Node.js 22 or 24 LTS is recommended.
+Node.js runs the build tools. This project requires Node.js 22 or newer. Node.js 22 or 24 LTS is recommended.
 
 Check the versions:
 
@@ -462,3 +462,4 @@ The project uses Dependabot for npm and GitHub Actions updates.
 GNU General Public License v3.0 only. See [LICENSE](LICENSE).
 
 Originally created by Stya Yur.
+

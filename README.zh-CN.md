@@ -75,7 +75,7 @@ Cloudflare Pages
 
 ## 五分钟运行 Demo
 
-你需要 Git 和 Node.js 20.9 或更新版本。Git 用来下载代码，Node.js 用来在你的电脑上运行网站。
+你需要 Git 和 Node.js 22 或更新版本。Git 用来下载代码，Node.js 用来在你的电脑上运行网站。
 
 ### Windows PowerShell
 
@@ -115,7 +115,7 @@ git --version
 
 ### Node.js
 
-Node.js 负责运行构建工具。本项目要求 Node.js 20.9 或更新版本，推荐 Node.js 22 或 24 LTS。
+Node.js 负责运行构建工具。本项目要求 Node.js 22 或更新版本，推荐 Node.js 22 或 24 LTS。
 
 检查版本：
 
@@ -462,3 +462,4 @@ https://discord.gg/wA2xy6VPK
 GNU General Public License v3.0 only。见 [LICENSE](LICENSE)。
 
 Originally created by Stya Yur.
+

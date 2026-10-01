@@ -2,11 +2,11 @@
 
 ## `npm` is not recognised
 
-Install Node.js 20.9 or newer and reopen the terminal. Check with `node --version` and `npm --version`.
+Install Node.js 22 or newer and reopen the terminal. Check with `node --version` and `npm --version`.
 
 ## Node version is too old
 
-Upgrade to Node.js 20.9 or newer. Node 22 or 24 LTS is also suitable.
+Upgrade to Node.js 22 or newer. Node 22 or 24 LTS is also suitable.
 
 ## `npm install` fails
 
@@ -71,3 +71,4 @@ Rebuild with `npm run build:public` and deploy the entire `out/` directory, incl
 ## Custom domain does not work
 
 Wait for DNS propagation, verify the CNAME/A records requested by Cloudflare, and check the custom-domain status inside the Pages project.
+

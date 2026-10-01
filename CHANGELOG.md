@@ -2,6 +2,12 @@
 
 All notable changes are documented here. The project follows Semantic Versioning while it is pre-1.0.
 
+## [0.1.3] - 2026-10-01
+
+### Changed
+
+- Raised the minimum Node.js version to 22 to match the current Wrangler runtime requirement.
+- Updated CI and Cloudflare deployment workflows to Node.js 22.
 ## [0.1.2] - 2026-10-01
 
 ### Changed
@@ -26,3 +32,4 @@ All notable changes are documented here. The project follows Semantic Versioning
 - Publication-boundary regression fixtures and tests.
 - Cloudflare Pages Direct Upload deployment guidance.
 - English and Simplified Chinese READMEs.
+
