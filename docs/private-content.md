@@ -27,7 +27,7 @@ Example `engine.lock.json`:
 ```json
 {
   "repository": "styayur/digital-garden-engine",
-  "ref": "v0.1.0"
+  "ref": "v0.1.2"
 }
 ```
 
@@ -45,3 +45,4 @@ Do not use `main` as the production pin. Select an exact tag or commit SHA, buil
 8. Deploy `engine/out` to Cloudflare Pages.
 
 The workflow belongs to the private repository. Cloudflare receives only `out/`; it does not receive the private repository.
+

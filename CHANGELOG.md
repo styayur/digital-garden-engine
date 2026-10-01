@@ -2,6 +2,18 @@
 
 All notable changes are documented here. The project follows Semantic Versioning while it is pre-1.0.
 
+## [0.1.2] - 2026-10-01
+
+### Changed
+
+- Aligned package metadata and the documented private-content engine pin.
+
+## [0.1.1] - 2026-10-01
+
+### Changed
+
+- Updated GitHub Actions runtimes to current major versions.
+
 ## [0.1.0] - 2026-10-01
 
 ### Added
