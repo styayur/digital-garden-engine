@@ -1,0 +1,30 @@
+# Dependencies
+/node_modules
+/.pnp
+.pnp.js
+
+# Next.js
+/.next/
+/out/
+
+# Generated publication staging
+/.build/
+/public/garden-assets/
+
+# Local engine checkout used by private content repositories
+/.engine/
+/.wrangler/
+
+# Local environment files
+.env
+.env*.local
+
+# TypeScript
+*.tsbuildinfo
+next-env.d.ts
+
+# Editors and operating systems
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/

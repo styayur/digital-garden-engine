@@ -1,0 +1,260 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ------------------------------------------------------------------ */
+/* Design tokens                                                       */
+/* Dark is the default and the soul of the garden. The .light class     */
+/* (added by next-themes) swaps the palette for a paper-like reading    */
+/* mode. RGB triplets are consumed by Tailwind via rgb(var(--x) / a).   */
+/* ------------------------------------------------------------------ */
+
+:root {
+  color-scheme: dark;
+
+  --bg: 11 13 16;          /* #0B0D10 — the night soil                  */
+  --surface: 18 21 26;     /* raised panels                             */
+  --ink: 229 231 235;      /* primary text #E5E7EB                      */
+  --muted: 156 163 175;    /* secondary text #9CA3AF                    */
+  --faint: 105 112 122;    /* tiny labels, captions                     */
+  --line: 41 46 54;        /* hairline borders                          */
+  --accent: 125 211 252;   /* #7DD3FC — a pale sky                      */
+  --accent-soft: 16 33 45; /* tinted chip background                    */
+
+  --font-display: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+  --font-serif: 'Source Serif 4', Georgia, 'Times New Roman', serif;
+  --font-sans: 'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+.light {
+  color-scheme: light;
+
+  --bg: 250 249 246;       /* warm paper                                 */
+  --surface: 255 255 255;
+  --ink: 28 31 36;
+  --muted: 84 93 104;
+  --faint: 129 137 147;
+  --line: 225 223 218;
+  --accent: 2 132 199;     /* a deeper sky for contrast on paper        */
+  --accent-soft: 222 240 250;
+}
+
+/* ------------------------------------------------------------------ */
+/* Base                                                                */
+/* ------------------------------------------------------------------ */
+
+@layer base {
+  * {
+    border-color: rgb(var(--line));
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: rgb(var(--bg));
+    color: rgb(var(--ink));
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background-color: rgb(var(--accent) / 0.28);
+    color: rgb(var(--ink));
+  }
+
+  :focus-visible {
+    outline: 2px solid rgb(var(--accent) / 0.7);
+    outline-offset: 2px;
+  }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: rgb(var(--line));
+    border-radius: 9999px;
+    border: 2px solid rgb(var(--bg));
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* Reusable atoms                                                      */
+/* ------------------------------------------------------------------ */
+
+@layer components {
+  .container-page {
+    @apply mx-auto w-full max-w-6xl px-6 sm:px-10;
+  }
+
+  /* small mono uppercase label, e.g. section indices */
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: rgb(var(--accent));
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* Article typography — a literary page, not a tech doc                */
+/* Unlayered rules intentionally override the typography plugin.       */
+/* ------------------------------------------------------------------ */
+
+.prose {
+  max-width: none;
+  font-family: var(--font-serif);
+  font-size: 1.0625rem;
+  line-height: 1.9;
+
+  --tw-prose-body: rgb(var(--ink));
+  --tw-prose-headings: rgb(var(--ink));
+  --tw-prose-lead: rgb(var(--muted));
+  --tw-prose-links: rgb(var(--accent));
+  --tw-prose-bold: rgb(var(--ink));
+  --tw-prose-counters: rgb(var(--muted));
+  --tw-prose-bullets: rgb(var(--muted));
+  --tw-prose-hr: rgb(var(--line));
+  --tw-prose-quotes: rgb(var(--ink));
+  --tw-prose-quote-borders: rgb(var(--line));
+  --tw-prose-captions: rgb(var(--muted));
+  --tw-prose-code: rgb(var(--ink));
+  --tw-prose-pre-code: #e2e8f0;
+  --tw-prose-pre-bg: #0d1014;
+  --tw-prose-th-borders: rgb(var(--line));
+  --tw-prose-td-borders: rgb(var(--line));
+}
+
+.prose :where(h1, h2, h3, h4) {
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: 0.005em;
+  color: rgb(var(--ink));
+  scroll-margin-top: 7rem;
+}
+
+.prose :where(h2) {
+  font-size: 1.8em;
+  margin-top: 2.4em;
+  margin-bottom: 0.8em;
+}
+
+.prose :where(h3) {
+  font-size: 1.25em;
+  margin-top: 1.9em;
+}
+
+.prose :where(a) {
+  color: rgb(var(--accent));
+  text-decoration: underline;
+  text-decoration-color: rgb(var(--accent) / 0.35);
+  text-underline-offset: 4px;
+  transition: text-decoration-color 0.2s ease;
+}
+
+.prose :where(a:hover) {
+  text-decoration-color: rgb(var(--accent));
+}
+
+.prose :where(blockquote) {
+  font-style: italic;
+  font-size: 1.1em;
+  line-height: 1.8;
+  color: rgb(var(--ink));
+  border-left-width: 2px;
+  border-left-color: rgb(var(--accent) / 0.6);
+  padding-left: 1.4em;
+  margin-top: 2em;
+  margin-bottom: 2em;
+}
+
+.prose :where(code):not(:where(pre *)) {
+  font-family: var(--font-mono);
+  font-size: 0.82em;
+  font-weight: 500;
+  color: rgb(var(--accent));
+  background-color: rgb(var(--accent-soft));
+  border-radius: 0.25rem;
+  padding: 0.15em 0.4em;
+}
+
+/* Code blocks stay dark in both themes — a small terminal on the page. */
+.prose :where(pre) {
+  background-color: #0d1014;
+  border: 1px solid rgb(var(--line) / 0.8);
+  border-radius: 0.75rem;
+  padding: 1.25rem 1.5rem;
+  overflow-x: auto;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  line-height: 1.75;
+}
+
+.prose :where(hr) {
+  border-color: rgb(var(--line));
+  margin-top: 3em;
+  margin-bottom: 3em;
+}
+
+.prose :where(img) {
+  border-radius: 0.75rem;
+}
+
+/* syntax colours — restrained, in the garden palette */
+.hljs-comment,
+.hljs-quote {
+  color: #6b7280;
+  font-style: italic;
+}
+.hljs-keyword,
+.hljs-selector-tag,
+.hljs-literal,
+.hljs-doctag,
+.hljs-template-tag {
+  color: #7dd3fc;
+}
+.hljs-string,
+.hljs-regexp,
+.hljs-addition {
+  color: #86efac;
+}
+.hljs-number,
+.hljs-meta,
+.hljs-symbol {
+  color: #fbbf24;
+}
+.hljs-built_in,
+.hljs-attr,
+.hljs-attribute,
+.hljs-variable,
+.hljs-params {
+  color: #93c5fd;
+}
+.hljs-title,
+.hljs-title.function_,
+.hljs-section,
+.hljs-type {
+  color: #c4b5fd;
+}
+.hljs-name,
+.hljs-selector-class,
+.hljs-selector-id {
+  color: #7dd3fc;
+}
+.hljs-deletion {
+  color: #fca5a5;
+}
+.hljs-emphasis {
+  font-style: italic;
+}
+.hljs-strong {
+  font-weight: 600;
+}

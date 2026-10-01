@@ -1,0 +1,7 @@
+{
+  "public": "PUBLIC_TEST_CANARY",
+  "forbidden": [
+    "DRAFT_MUST_NEVER_PUBLISH_4f7e",
+    "PRIVATE_MUST_NEVER_PUBLISH_b931"
+  ]
+}

@@ -1,0 +1,61 @@
+{
+  "name": "digital-garden-engine",
+  "version": "0.1.0",
+  "private": false,
+  "description": "Open-source, static-first digital garden engine for essays, notes, projects and personal knowledge.",
+  "scripts": {
+    "dev": "node scripts/dev.mjs",
+    "build": "node scripts/build-full.mjs",
+    "start": "next start",
+    "typecheck": "tsc --noEmit",
+    "test": "node --test tests/*.test.mjs",
+    "content:validate": "node scripts/validate-content.mjs",
+    "content:stage": "node scripts/stage-content.mjs",
+    "build:public": "node scripts/build-public.mjs",
+    "build:example": "node scripts/build-public.mjs --source examples/content --output-dir out",
+    "build:static": "node scripts/build-public.mjs",
+    "check:links": "node scripts/check-links.mjs",
+    "artifact:audit": "node scripts/artifact-audit.mjs",
+    "test:publication-boundary": "node --test tests/publication-boundary.test.mjs"
+  },
+  "engines": {
+    "node": ">=20.9.0"
+  },
+  "dependencies": {
+    "@fontsource/cormorant-garamond": "^5.1.0",
+    "@fontsource/inter": "^5.1.0",
+    "@fontsource/jetbrains-mono": "^5.1.0",
+    "@fontsource/source-serif-4": "^5.1.0",
+    "@tailwindcss/typography": "^0.5.15",
+    "framer-motion": "^11.11.17",
+    "github-slugger": "^2.0.0",
+    "gray-matter": "^4.0.3",
+    "next": "^16.3.8",
+    "next-mdx-remote": "^6.0.0",
+    "next-themes": "^0.4.6",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "rehype-highlight": "^7.0.1",
+    "rehype-slug": "^6.0.0",
+    "remark-gfm": "^4.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.17.0",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.4.49",
+    "tailwindcss": "^3.4.15",
+    "typescript": "^5.6.3",
+    "wrangler": "^4.145.0"
+  },
+  "license": "GPL-3.0-only",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/styayur/digital-garden-engine.git"
+  },
+  "homepage": "https://github.com/styayur/digital-garden-engine#readme",
+  "bugs": {
+    "url": "https://github.com/styayur/digital-garden-engine/issues"
+  }
+}
