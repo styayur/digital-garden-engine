@@ -3,29 +3,67 @@ import Link from 'next/link';
 import { ArticleCard } from '@/components/ArticleCard';
 import { BookCard } from '@/components/BookCard';
 import { FadeIn } from '@/components/FadeIn';
-import { Hero } from '@/components/Hero';
+import { FeaturedProjectCard } from '@/components/FeaturedProjectCard';
 import { KnowledgeGraph } from '@/components/KnowledgeGraph';
-import { ProjectCard } from '@/components/ProjectCard';
+import { PortfolioHero } from '@/components/PortfolioHero';
+import { ProjectGroup } from '@/components/ProjectGroup';
 import { SectionHeading } from '@/components/SectionHeading';
 import { getBooks, getQuotes } from '@/lib/library';
 import { getLatestPosts } from '@/lib/posts';
-import { getFeaturedProjects } from '@/lib/projects';
+import { PROJECT_CATEGORIES, getFeaturedProjects, getProjectsByCategory } from '@/lib/projects';
 
 export default function HomePage() {
   const [first, ...rest] = getLatestPosts(4);
-  const projects = getFeaturedProjects().slice(0, 3);
+  const featured = getFeaturedProjects().slice(0, 4);
+  const byCategory = getProjectsByCategory();
   const books = getBooks().slice(0, 3);
   const quote = getQuotes()[0];
 
   return (
     <>
-      <Hero />
+      <PortfolioHero />
 
-      {/* 01 — Latest writing */}
+      {/* 01 — Featured Work */}
       <section className="container-page mt-28 sm:mt-36">
         <FadeIn>
           <SectionHeading
             index="01"
+            title="Featured Work"
+            href="/projects"
+            linkLabel="All projects"
+          />
+        </FadeIn>
+        <div className="mt-8 grid gap-6 sm:grid-cols-2">
+          {featured.map((project, i) => (
+            <FadeIn key={project.slug} delay={i * 0.08} className="h-full">
+              <FeaturedProjectCard project={project} />
+            </FadeIn>
+          ))}
+        </div>
+      </section>
+
+      {/* 02 — Open Source Studio */}
+      <section className="container-page mt-28 sm:mt-36">
+        <FadeIn>
+          <SectionHeading
+            index="02"
+            title="Open Source Studio"
+            href="/projects"
+            linkLabel="The workshop"
+          />
+        </FadeIn>
+        {PROJECT_CATEGORIES.map(({ value, label }) => (
+          <FadeIn key={value}>
+            <ProjectGroup label={label} projects={byCategory.get(value) ?? []} />
+          </FadeIn>
+        ))}
+      </section>
+
+      {/* 03 — Latest writing */}
+      <section className="container-page mt-28 sm:mt-36">
+        <FadeIn>
+          <SectionHeading
+            index="03"
             title="Latest Writing"
             href="/writing"
             linkLabel="All essays"
@@ -39,30 +77,11 @@ export default function HomePage() {
         </FadeIn>
       </section>
 
-      {/* 02 — Featured projects */}
+      {/* 04 — Digital garden */}
       <section className="container-page mt-28 sm:mt-36">
         <FadeIn>
           <SectionHeading
-            index="02"
-            title="Featured Projects"
-            href="/projects"
-            linkLabel="The workshop"
-          />
-        </FadeIn>
-        <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {projects.map((project, i) => (
-            <FadeIn key={project.slug} delay={i * 0.08} className="h-full">
-              <ProjectCard project={project} />
-            </FadeIn>
-          ))}
-        </div>
-      </section>
-
-      {/* 03 — Digital garden */}
-      <section className="container-page mt-28 sm:mt-36">
-        <FadeIn>
-          <SectionHeading
-            index="03"
+            index="04"
             title="The Garden"
             href="/garden"
             linkLabel="Wander it"
@@ -85,11 +104,11 @@ export default function HomePage() {
         </FadeIn>
       </section>
 
-      {/* 04 — Library */}
+      {/* 05 — Library */}
       <section className="container-page mt-28 sm:mt-36">
         <FadeIn>
           <SectionHeading
-            index="04"
+            index="05"
             title="From the Library"
             href="/library"
             linkLabel="Browse shelves"

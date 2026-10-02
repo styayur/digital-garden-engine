@@ -7,6 +7,8 @@ export const REPO_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url
 export const PUBLICATION_STATUSES = ['published', 'draft', 'private'];
 export const STATUS_DIRECTORIES = { published: 'published', draft: 'drafts', private: 'private' };
 export const CONTENT_KINDS = ['posts', 'projects', 'library'];
+export const PROJECT_STATUSES = ['stable', 'beta', 'research', 'experimental', 'maintenance'];
+export const PROJECT_CATEGORIES = ['systems', 'knowledge', 'creative', 'education', 'humanities', 'experiments', 'utilities', 'concepts'];
 export const SLUG_RE = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 
 const COMMON_FIELDS = ['title', 'slug', 'date', 'status', 'description', 'tags'];
@@ -18,9 +20,15 @@ const KNOWN_FIELDS = {
     'summary',
     'year',
     'projectStatus',
+    'category',
     'featured',
+    'priority',
     'stack',
     'links',
+    'github',
+    'live',
+    'release',
+    'image',
   ],
   library: [...COMMON_FIELDS, 'kind', 'author', 'readingStatus', 'note'],
 };
@@ -121,7 +129,7 @@ function validateKind(data, kind, context, errors) {
   }
 
   if (kind === 'projects') {
-    for (const field of ['name', 'projectStatus']) {
+    for (const field of ['name', 'projectStatus', 'category']) {
       if (typeof data[field] !== 'string' || data[field].trim().length === 0) {
         errors.push(`${context}: "${field}" must be a non-empty string`);
       }
@@ -129,12 +137,28 @@ function validateKind(data, kind, context, errors) {
     if (!['string', 'number'].includes(typeof data.year) || String(data.year).trim().length === 0) {
       errors.push(`${context}: "year" must be a non-empty string or number`);
     }
-    if (!['Building', 'Live', 'Prototype', 'Paused', 'Archived'].includes(data.projectStatus)) {
+    if (!PROJECT_STATUSES.includes(data.projectStatus)) {
       errors.push(`${context}: unknown projectStatus`);
     }
+    if (!PROJECT_CATEGORIES.includes(data.category)) {
+      errors.push(`${context}: unknown category`);
+    }
     if (typeof data.featured !== 'boolean') errors.push(`${context}: "featured" must be boolean`);
+    if (typeof data.priority !== 'number' || !Number.isInteger(data.priority)) {
+      errors.push(`${context}: "priority" must be an integer`);
+    }
     if (!Array.isArray(data.stack)) errors.push(`${context}: "stack" must be an array`);
     if (!Array.isArray(data.links)) errors.push(`${context}: "links" must be an array`);
+    for (const field of ['github', 'live', 'release']) {
+      if (data[field] !== undefined && (typeof data[field] !== 'string' || !/^https?:\/\//.test(data[field]))) {
+        errors.push(`${context}: "${field}" must be an http(s) URL`);
+      }
+    }
+    if (data.image !== undefined && typeof data.image === 'string' && data.image.trim() !== '') {
+      if (!data.image.startsWith('/garden-assets/')) {
+        errors.push(`${context}: "image" must be a /garden-assets/ path`);
+      }
+    }
   }
 
   if (kind === 'library') {
@@ -234,6 +258,13 @@ export function validateContent(gardenRoot) {
         }
 
         validateAssetReferences(parsed.content, status, kind, context, gardenRoot, errors);
+        if (kind === 'projects' && status === 'published' && typeof data.image === 'string' && data.image.startsWith('/garden-assets/')) {
+          const assetRoot = path.join(gardenRoot, 'published', 'assets');
+          const cleanImage = decodeURIComponent(data.image.split(/[?#]/, 1)[0]).replace(/^\/garden-assets\//, '');
+          if (!fs.existsSync(path.join(assetRoot, ...cleanImage.split('/')))) {
+            errors.push(`${context}: "image" asset is missing`);
+          }
+        }
         counts[status] += 1;
       }
     }
