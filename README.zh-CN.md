@@ -10,7 +10,7 @@
 - **截图：** 运行 `npm run dev`，然后在浏览器打开 `http://localhost:3000`。
 - **快速开始：** 跳到[五分钟运行 Demo](#五分钟运行-demo)。
 - **文档：** 查看[文档索引](#文档)。
-- **许可证：** GNU General Public License v3.0 only，见 [LICENSE](LICENSE)。
+- **许可证：** Mozilla Public License 2.0，见 [LICENSE](LICENSE)。
 
 ## 它是什么
 
@@ -481,7 +481,7 @@ https://discord.gg/wA2xy6VPK
 
 ## 许可证
 
-GNU General Public License v3.0 only。见 [LICENSE](LICENSE)。
+Mozilla Public License 2.0。见 [LICENSE](LICENSE)。
 
 Originally created by Stya Yur.
 

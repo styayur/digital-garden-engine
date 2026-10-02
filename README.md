@@ -12,7 +12,7 @@
 
 [![release](https://img.shields.io/github/v/release/styayur/digital-garden-engine)](https://github.com/styayur/digital-garden-engine/releases/latest)
 [![CI](https://github.com/styayur/digital-garden-engine/actions/workflows/ci.yml/badge.svg)](https://github.com/styayur/digital-garden-engine/actions/workflows/ci.yml)
-[![license: GPL-3.0](https://img.shields.io/badge/license-GPL--3.0-blue)](LICENSE)
+[![license: MPL-2.0](https://img.shields.io/badge/license-MPL--2.0-blue)](LICENSE)
 [![Next.js](https://img.shields.io/badge/Next.js-black?logo=nextdotjs&logoColor=white)]()
 [![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=white)]()
 [![Cloudflare Pages](https://img.shields.io/badge/Cloudflare%20Pages-F6821F?logo=cloudflarepages&logoColor=white)]()
@@ -27,7 +27,10 @@ An open-source, static-first digital garden engine for essays, notes, projects a
 
 - **Quick start:** jump to [Run the demo in five minutes](#run-the-demo-in-five-minutes).
 - **Documentation:** see the [documentation index](#documentation).
-- **License:** GNU General Public License v3.0 only. See [LICENSE](LICENSE).
+- **License:** Mozilla Public License 2.0. See [LICENSE](LICENSE).
+
+Digital Garden Engine is licensed under MPL-2.0. Content, site configuration, writing, themes or assets supplied by users are not automatically licensed under MPL-2.0 merely because they are processed by or used with the engine.
+
 ## What it is
 
 - A local-first authoring system for Markdown and MDX.
@@ -497,7 +500,7 @@ The project uses Dependabot for npm and GitHub Actions updates.
 
 ## License
 
-GNU General Public License v3.0 only. See [LICENSE](LICENSE).
+Mozilla Public License 2.0. See [LICENSE](LICENSE).
 
 Originally created by Stya Yur.
 
