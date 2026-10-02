@@ -9,8 +9,10 @@ tags:
 name: "Private example project"
 summary: "Private canary content."
 year: "2026"
-projectStatus: "Paused"
+projectStatus: "maintenance"
+category: "concepts"
 featured: false
+priority: 0
 stack:
   - Markdown
 links: []

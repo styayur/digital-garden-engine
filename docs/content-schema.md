@@ -45,7 +45,14 @@ Optional `maturity` values are `seedling`, `budding` and `evergreen`. The public
 
 ## Projects
 
-Projects require `name`, `year`, `projectStatus`, `featured`, `stack` and `links`. Valid project states are `Building`, `Live`, `Prototype`, `Paused` and `Archived`.
+Projects require `name`, `year`, `projectStatus`, `category`, `featured`, `priority`, `stack` and `links`.
+
+- Publication `status` (`published` | `draft` | `private`) controls the publication gate and is separate from lifecycle.
+- `projectStatus` (lifecycle) must be one of: `stable`, `beta`, `research`, `experimental`, `maintenance`.
+- `category` must be one of: `systems`, `knowledge`, `creative`, `education`, `humanities`, `experiments`, `utilities`, `concepts`.
+- `featured` must be a boolean; `priority` must be an integer.
+- Optional `github`, `live`, `release` must be valid `https://` URLs.
+- Optional `image` must be a `/garden-assets/...` path that exists under `published/assets/`.
 
 ## Library
 
