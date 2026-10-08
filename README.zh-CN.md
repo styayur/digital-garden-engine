@@ -1,8 +1,13 @@
 # Digital Garden Engine
 
+**历史引擎源码。** [styayur.co.uk](https://styayur.co.uk) 的渲染器已整合到私有
+`styayur/site` 仓库。生产构建直接使用该仓库，不再 checkout 本引擎。
+这里保留源码来源、许可证、Release、Issues 与已有 fork 的历史，不再计划新的引擎发行。
+下文是历史引擎文档，不代表当前私有站点的部署或 CMS 接口。
+
 一个开源、静态优先的数字花园引擎，用于承载文章、笔记、项目与个人知识。
 
-**Status:** 🔵 Research
+**维护状态：** 经生产切换验证后保留为历史归档。
 
 它采用本地优先的工作方式，支持 Markdown 和 MDX，生成静态网站，并通过明确的发布边界把公开代码与私人内容分开。
 
