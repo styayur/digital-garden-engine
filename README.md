@@ -1,8 +1,11 @@
-<div align="center">
-
-<img src="docs/assets/brand/logo-mark.svg" width="84" alt="Digital Garden Engine logo" />
-
 # Digital Garden Engine
+
+**Historical engine source.** The renderer for [styayur.co.uk](https://styayur.co.uk)
+has been integrated into the private `styayur/site` repository. Production builds
+that repository directly; it no longer checks out this engine. This repository
+is retained for source provenance, licenses, releases, issues and existing forks.
+No new engine releases are planned. The documents below describe the preserved
+historical engine, not the current private site's deployment or CMS contract.
 
 **Static-first engine for personal knowledge publishing.**
 
@@ -13,15 +16,10 @@
 [![release](https://img.shields.io/github/v/release/styayur/digital-garden-engine)](https://github.com/styayur/digital-garden-engine/releases/latest)
 [![CI](https://github.com/styayur/digital-garden-engine/actions/workflows/ci.yml/badge.svg)](https://github.com/styayur/digital-garden-engine/actions/workflows/ci.yml)
 [![license: MPL-2.0](https://img.shields.io/badge/license-MPL--2.0-blue)](LICENSE)
-[![Next.js](https://img.shields.io/badge/Next.js-black?logo=nextdotjs&logoColor=white)]()
-[![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=white)]()
-[![Cloudflare Pages](https://img.shields.io/badge/Cloudflare%20Pages-F6821F?logo=cloudflarepages&logoColor=white)]()
 
 ![Digital Garden Engine local demo](docs/assets/demo.png)
 
-</div>
-
-**Status:** 🔵 Research
+**Maintenance:** historical archive following verified production cutover.
 
 An open-source, static-first digital garden engine for essays, notes, projects and personal knowledge. It is local-first, works with Markdown and MDX, produces a static website, and is designed around a clear publication boundary between public code and private content.
 
