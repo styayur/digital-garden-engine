@@ -1,11 +1,11 @@
 # Digital Garden Engine
 
-**Historical engine source.** The renderer for [styayur.co.uk](https://styayur.co.uk)
-has been integrated into the private `styayur/site` repository. Production builds
-that repository directly; it no longer checks out this engine. This repository
+**Archived historical engine source.** The renderer for [styayur.co.uk](https://styayur.co.uk)
+has been integrated into the canonical website source. Production builds
+that source directly; it no longer checks out this engine. This repository
 is retained for source provenance, licenses, releases, issues and existing forks.
 No new engine releases are planned. The documents below describe the preserved
-historical engine, not the current private site's deployment or CMS contract.
+historical engine, not the current production site's deployment or CMS contract.
 
 **Static-first engine for personal knowledge publishing.**
 
