@@ -29,7 +29,7 @@
     "build:pages": "node scripts/build-pages.mjs",
     "desktop:dev": "tauri dev --config src-tauri/tauri.conf.json",
     "desktop:build": "tauri build --config src-tauri/tauri.conf.json",
-    "desktop:test": "cargo test --manifest-path src-tauri/Cargo.toml",
+    "desktop:test": "node scripts/prepare-desktop-test.mjs",
     "desktop:icons": "tauri icon docs/assets/brand/logo-mark.svg -o src-tauri/icons"
   },
   "engines": {
