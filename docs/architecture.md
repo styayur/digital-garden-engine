@@ -1,42 +1,119 @@
 # Architecture
 
-The engine is deliberately split into two boundaries:
+Rhizomaybor has one persisted project model and three consumers:
 
 ```text
-content source
-    │
-    ▼
-content:validate
-    │
-    ▼
-content:stage
-    │
-    ▼
-.build/public-content
-    │
-    ▼
-Next.js static export
-    │
-    ▼
-artifact:audit
-    │
-    ▼
-out/
+                SiteProject JSON
+                       │
+       ┌───────────────┼────────────────┐
+       │               │                │
+ Online editor    Desktop shell    Static generator
+  /editor/         Tauri 2          build-project
+       │               │                │
+       └───────────────┴────────────────┘
+                       │
+                 Export manifest
+                       │
+               genuine 7z archives
 ```
 
-The publication gate reads only `published/` when producing the public build. The normal `content/` directory is never passed directly to Next.js for a public deployment.
+The rendered DOM is a projection of the model. Clicking the preview produces model events; it does not write arbitrary DOM mutations into persistence.
 
-## Public engine + private content
+## Core layers
 
-A private content repository stores `content/`, `site.config.ts` and `engine.lock.json`. CI checks out a pinned public engine revision, copies the private configuration into that checkout, and runs the same commands a local user runs.
+### 1. Project schema
 
-The content repository is not a dependency of the engine. The engine remains useful by itself because `examples/content/` contains a complete fictional demo.
+`lib/project/schema.ts` defines versioned Zod schemas for the shared model. The current schema and project version are `0.5.0`.
 
-## Defense in depth
+Unknown fields are retained through open object schemas. This prevents a newer project from losing information merely because an older editor does not understand it.
 
-1. The directory boundary admits only `published/` into staging.
-2. Frontmatter must say `status: published` for an entry to pass the gate.
-3. The public build temporarily excludes `app/admin` and `app/api`.
-4. Artifact auditing scans the generated `out/` directory for forbidden canaries, private fingerprints, secrets, admin routes and source maps.
+### 2. Migration and validation
 
-A failure at any layer stops deployment.
+`lib/project/migrations.ts` performs explicit version migration and records every applied step. Unsupported future versions fail closed.
+
+`lib/project/validation.ts` checks:
+
+- duplicate IDs and page paths;
+- supported section layouts and component placement;
+- property types and numeric limits;
+- missing assets and linked documents;
+- internal links;
+- publication constraints;
+- suspicious credential-shaped values.
+
+### 3. Editor state
+
+`lib/project/editor-state.ts` contains immutable operations for:
+
+- component property changes;
+- component/section/card ordering;
+- section and page configuration;
+- theme and navigation changes;
+- content-document updates;
+- undo, redo and saved baselines.
+
+The React reducer owns the current `SiteProject`, history, baseline and dirty comparison. Autosave records live in browser storage and survive interrupted editing.
+
+### 4. Rendering
+
+`lib/project/render-site.ts` is a pure HTML renderer shared by:
+
+- editor preview;
+- standalone website generation;
+- publishable archive generation.
+
+The preview runs inside an iframe with `sandbox="allow-same-origin"`. Parent-side event delegation attaches selection and drag-and-drop behavior without enabling scripts inside the frame.
+
+### 5. Export
+
+`lib/project/export.ts` creates two validated output modes:
+
+- `project`: complete editable source and publication state;
+- `website`: only approved public output.
+
+Both plans include `export-manifest.json` with schema version, project version, file inventory, byte sizes and SHA-256 checksums.
+
+`lib/project/archive.ts` creates real 7z containers. The browser loads the 7-Zip 24.09 UMD/WASM runtime from local static assets; Node commands use the same package.
+
+## Online editor
+
+The online editor is a static Next.js client route. It may use browser file APIs and browser storage, but it has no server-side write path and no embedded repository credentials.
+
+GitHub Pages serves the application beneath `/rhizomaybor`. `next.config.mjs` applies `basePath` and `assetPrefix`; the Playwright subpath test verifies real asset loading and editor startup.
+
+## Desktop shell
+
+The desktop application is a Tauri 2 shell around the same static application. It uses WebView2 on Windows and adds Rust commands for constrained local filesystem writes:
+
+- save the project into `.rhizomaybor/project.json` and `rhizomaybor.project.json`;
+- load an existing project file;
+- write generated site or export files beneath a selected root;
+- reject absolute paths and parent traversal.
+
+No separate desktop editor implementation exists.
+
+## Publication boundary
+
+For legacy Markdown/MDX content:
+
+1. only `published/` enters staging;
+2. frontmatter must agree with the directory;
+3. admin and API route directories are excluded from the public build;
+4. `artifact-audit` rejects canaries, secrets, source maps and forbidden routes.
+
+For project-model websites:
+
+1. only published pages are rendered;
+2. only published sections enter a page;
+3. only published content documents are emitted as standalone documents;
+4. only published assets with embedded data are written;
+5. excluded draft/private records are recorded in the export manifest.
+
+## Failure behavior
+
+- Invalid import: rejected before replacing the current project.
+- Unsupported schema: rejected.
+- Unknown component: blocking validation error.
+- Unsupported layout placement: rejected by the editor and validator.
+- Future incompatible component: retained as source data but blocks website export until supported.
+- Archive failure: no success message; the generated bytes are surfaced only after the WASM call returns.

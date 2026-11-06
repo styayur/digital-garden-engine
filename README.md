@@ -1,504 +1,298 @@
-# Digital Garden Engine
+# Rhizomaybor
 
-**Archived historical engine source.** The renderer for [styayur.co.uk](https://styayur.co.uk)
-has been integrated into the canonical website source. Production builds
-that source directly; it no longer checks out this engine. This repository
-is retained for source provenance, licenses, releases, issues and existing forks.
-No new engine releases are planned. The documents below describe the preserved
-historical engine, not the current production site's deployment or CMS contract.
+**A reusable, constrained visual editor and static website builder for digital gardens and personal sites.**
 
-**Static-first engine for personal knowledge publishing.**
+Rhizomaybor lets people maintain a supported website structure without treating the rendered page as source code. Content, layout, theme and publication state live in one versioned project model shared by the online editor, the desktop shell and the standalone website generator.
 
-[Documentation](#documentation) · [Releases](https://github.com/styayur/digital-garden-engine/releases) · [Issues](https://github.com/styayur/digital-garden-engine/issues)
+- **Online editor:** static application at `/editor/`, deployable to GitHub Pages.
+- **Desktop editor:** Tauri 2 shell for opening and saving a local project directory.
+- **MarkText-style content editing:** direct rendered editing through Muya, plus source and isolated preview modes.
+- **Constrained visual layout:** registered components, permitted containers, drag-and-drop ordering, theme controls and responsive previews.
+- **Genuine 7z export:** real 7-Zip archives created with 7-Zip 24.09 compiled to WebAssembly.
+- **Publication boundary:** the deployable website archive contains only approved public pages, sections, documents and assets.
 
-[English](README.md) · [中文](README.zh-CN.md)
+Rhizomaybor is not an unrestricted HTML/CSS IDE, drag-anywhere website canvas, SaaS CMS or hosted publishing service. It is a guided editing layer for websites that fit its component model.
 
-[![release](https://img.shields.io/github/v/release/styayur/digital-garden-engine)](https://github.com/styayur/digital-garden-engine/releases/latest)
-[![CI](https://github.com/styayur/digital-garden-engine/actions/workflows/ci.yml/badge.svg)](https://github.com/styayur/digital-garden-engine/actions/workflows/ci.yml)
-[![license: MPL-2.0](https://img.shields.io/badge/license-MPL--2.0-blue)](LICENSE)
+![Rhizomaybor visual editor](docs/assets/editor.png)
 
-![Digital Garden Engine local demo](docs/assets/demo.png)
+## Status
 
-**Maintenance:** historical archive following verified production cutover.
+The current line is **v0.5.0**. The online editor, shared project model, standalone site builder and 7z export path are covered by automated browser and Node tests. Desktop source and packaging are included; see the test report and release notes in this repository for the exact verification state of the current commit.
 
-An open-source, static-first digital garden engine for essays, notes, projects and personal knowledge. It is local-first, works with Markdown and MDX, produces a static website, and is designed around a clear publication boundary between public code and private content.
+The application does not require an account, database, backend or cloud service.
 
-- **Quick start:** jump to [Run the demo in five minutes](#run-the-demo-in-five-minutes).
-- **Documentation:** see the [documentation index](#documentation).
-- **License:** Mozilla Public License 2.0. See [LICENSE](LICENSE).
+## Who this is for
 
-Digital Garden Engine is licensed under MPL-2.0. Content, site configuration, writing, themes or assets supplied by users are not automatically licensed under MPL-2.0 merely because they are processed by or used with the engine.
+Rhizomaybor is designed for:
 
-## What it is
+- personal website owners who want to maintain writing, projects, notes and about pages without editing source files for every change;
+- digital-garden authors who want a stable content and publication model;
+- template authors who can define supported pages, sections, components and themes;
+- developers who need a portable static export rather than a hosted CMS lock-in.
 
-- A local-first authoring system for Markdown and MDX.
-- A static publishing pipeline with no database required for the public site.
-- A Next.js, React and TypeScript engine that can be forked and modified.
-- A publication-gate design for keeping drafts and private notes outside public artifacts.
-- A starter for a personal website, digital garden, writing archive or project notebook.
+It is not designed for arbitrary page-building, unrestricted script editing or multi-user cloud collaboration.
 
-## What it is not
+## What visual editing can change
 
-- It is not a hosted blogging service.
-- It is not a CMS SaaS product.
-- It is not an AI writing platform.
-- It does not upload notes anywhere by itself.
-- It does not promise that making a Git repository private is enough to keep content out of a public build.
+The editor can change supported model data:
 
-## Core architecture
+- page titles, descriptions and publication status;
+- navigation labels and links;
+- registered components and their supported properties;
+- the order of components within a permitted section;
+- card order inside a card grid;
+- section layout and variant from the registry;
+- typography, colors, spacing, corners and content width from bounded theme options;
+- Markdown, MDX and HTML content documents;
+- local project assets and their publication status.
 
-```text
-Markdown / MDX
-      │
-      ▼
-content:validate
-      │
-      ▼
-Publication Gate
-      │
-      ▼
-.build/public-content
-      │
-      ▼
-Next.js static export
-      │
-      ▼
-artifact:audit
-      │
-      ▼
-Cloudflare Pages
-```
+The editor does **not** convert the persistent project into arbitrary DOM mutations. It also does not let unsupported components or layouts enter a section that does not permit them.
 
-The advanced architecture separates public software from private source material:
+## Online and desktop modes
 
-```text
-PUBLIC ENGINE
-styayur/digital-garden-engine
-        │ pinned ref
-        ▼
-PRIVATE CONTENT
-content/ + site.config.ts
-        │
-        ▼
-GitHub Actions
-        │ validate + stage + build + audit
-        ▼
-PUBLIC ARTIFACT
-out/
-        │
-        ▼
-Cloudflare Pages
-```
+### Online editor
 
-The engine can be cloned and used by anyone. The private content repository remains private. Cloudflare receives only the generated static artifact.
+Run locally:
 
-## Run the demo in five minutes
-
-You need Git and Node.js 22 or newer. Git downloads the code. Node.js runs the website on your computer.
-
-### Windows PowerShell
-
-```powershell
-git clone https://github.com/styayur/digital-garden-engine.git
-cd digital-garden-engine
+```bash
 npm install
 npm run dev
 ```
 
-### macOS or Linux
+Open `http://localhost:3000/editor/`.
+
+The online editor:
+
+- imports a `.json` project or a `.7z` project archive;
+- stores autosave and recovery state in browser storage;
+- downloads project JSON and genuine `.7z` archives;
+- never writes directly to a GitHub repository;
+- does not embed a GitHub token or publishing secret.
+
+GitHub Pages deployment is handled by [`.github/workflows/pages.yml`](.github/workflows/pages.yml). The build uses the `/rhizomaybor` subpath and is exercised by Playwright.
+
+### Desktop editor
+
+The desktop edition reuses the same React editor and project model through a Tauri 2 shell. It adds local directory selection, direct project saves and writing generated site files to disk.
 
 ```bash
-git clone https://github.com/styayur/digital-garden-engine.git
-cd digital-garden-engine
-npm install
-npm run dev
+npm run desktop:dev
+npm run desktop:build
 ```
 
-Open `http://localhost:3000` in a browser. `localhost` means the website running on your own computer. Leave the terminal open while you use the site.
+Windows 11 is the primary packaging target. The desktop build uses the system WebView2 runtime. See [docs/desktop.md](docs/desktop.md).
 
-The demo uses fictional content from `examples/content/`.
+## Supported content formats
 
-## Prerequisites
+Project content documents have an explicit format:
 
-### Git
-
-Git is a version-control tool. This project uses it to download the engine and track changes.
-
-Check whether Git is installed:
-
-```bash
-git --version
-```
-
-Install Git from https://git-scm.com/downloads if the command is unavailable.
-
-### Node.js
-
-Node.js runs the build tools. This project requires Node.js 22 or newer. Node.js 22 or 24 LTS is recommended.
-
-Check the versions:
-
-```bash
-node --version
-npm --version
-```
-
-Download Node.js from https://nodejs.org/. Reopen the terminal after installation.
-
-## Write your first article
-
-Create `examples/content/published/posts/hello-world.mdx`:
-
-```md
----
-title: "Hello World"
-slug: "hello-world"
-date: "2026-10-01"
-status: "published"
-description: "My first garden note."
-tags:
-  - hello
-maturity: "seedling"
----
-
-# Hello
-
-This is my first note.
-```
-
-Run:
-
-```bash
-npm run dev
-```
-
-Open `http://localhost:3000/writing/hello-world`.
-
-`maturity` is optional and describes how mature the note is. It is different from the publication `status`.
-
-## Published, draft and private
-
-```text
-published = allowed into the public website
-draft     = local or private only
-private   = never allowed into a public build
-```
-
-The content contract is:
-
-```text
-content/
-├── published/
-│   ├── posts/
-│   ├── projects/
-│   ├── library/
-│   └── assets/
-├── drafts/
-└── private/
-```
-
-A private Git repository is useful, but it is not the publication gate. The gate is the software check that decides which files may enter a public build.
-
-The public build:
-
-1. validates all content statuses;
-2. reads only `published/`;
-3. stages published content under `.build/public-content/`;
-4. builds Next.js from that staging directory;
-5. excludes `app/admin` and `app/api`;
-6. audits the generated artifact before deployment.
-
-Unknown values such as `publish`, `public`, `hidden` or an undefined status fail the build. They never default to published.
-
-## Public engine plus private content
-
-Use one repository when the engine, content and deployment configuration can all be public. Use two repositories when drafts, private notes or personal configuration must remain private.
-
-For a personal knowledge garden, the two-repository setup is recommended:
-
-```text
-public engine repository
-private content repository
-GitHub Actions
-Cloudflare Pages Direct Upload
-```
-
-The private repository keeps `content/`, `site.config.ts` and `engine.lock.json`. Its workflow checks out a pinned public engine revision, copies the private configuration into that checkout, and runs the same `npm run build:public` command used locally.
-
-See [docs/private-content.md](docs/private-content.md).
-
-## Folder structure
-
-```text
-app/          Next.js routes, layouts, metadata and the optional admin surface
-components/   reusable interface components
-lib/          content readers, site configuration and MDX rendering
-scripts/      validation, staging, build, link checking and artifact audit
-public/       static files committed to the engine
-examples/     complete fictional demo content
-fixtures/     publication-boundary canary fixtures
-tests/        automated regression tests
-docs/         architecture, deployment, schema, security and troubleshooting guides
-```
-
-Most users only need:
-
-- `site.config.ts`
-- their content directory
-- their published asset directory
-
-Most users should not need to edit:
-
-- `scripts/`
-- `lib/content-root.ts`
-- the publication gate
-- the artifact audit
-
-## Commands
-
-| Command | Purpose | When to run it | Common failure |
+| Format | Visual editing | Source editing | Notes |
 | --- | --- | --- | --- |
-| `npm run dev` | Start the development server with staged demo content. | While writing. | Node version too old; port in use. |
-| `npm run typecheck` | Check TypeScript. | Before committing. | A typed API or component changed. |
-| `npm test` | Run unit and publication-boundary tests. | Before committing and in CI. | A canary crossed the boundary or a fixture is invalid. |
-| `npm run content:validate` | Validate frontmatter, slugs, dates, statuses, duplicates, links and assets. | After editing content. | Invalid or unsupported frontmatter. |
-| `npm run content:stage` | Build `.build/public-content/` from published entries only. | When debugging the publication gate. | A published entry is invalid. |
-| `npm run build:public` | Validate, stage, static-export, check links and audit the artifact. | Before deploying. | Build, link or audit failure. |
-| `npm run check:links` | Check links inside `out/`. | After a public build. | A link points to a missing page or asset. |
-| `npm run artifact:audit` | Scan `out/` for leaks and forbidden files. | After a public build. | A canary, secret, source map or admin route was found. |
-| `npm run build` | Build the full private/development app, including admin and APIs. | Private development only. | Not a public deployment target. |
+| Markdown | Muya visual engine | Yes | GFM tables, lists, links, images and standard formatting |
+| MDX | Muya visual engine | Yes | MDX component syntax is preserved in source but is not executed by the standalone export |
+| HTML | HTML-aware contentEditable | Yes | Unknown safe elements and attributes are retained wherever the sanitizer permits them |
 
-## Customisation
+For HTML, Rhizomaybor analyzes the source before opening visual mode. Unknown structures are reported and source mode remains available. Content is never silently converted from HTML to Markdown.
 
-Open `site.config.ts` and change:
+Previewing untrusted HTML uses a sandboxed, script-free document. Scripts and event-handler attributes are removed from rendered output while the original project source remains available in source mode.
 
-- name
-- initials
-- role
-- intro lines
-- description
-- author
-- locale
-- canonical URL
-- terminal prompt identity
-- navigation
-- social links
-- About profile
-- Now page data
+## One shared project model
 
-For visual changes:
+The canonical model is a `SiteProject` JSON document with versioned schemas for:
 
-- Global colour tokens: `app/globals.css`
-- Tailwind theme and fonts: `tailwind.config.ts`
-- Homepage composition: `app/page.tsx`
-- Cards and sections: `components/`
-- Command palette index: `app/layout.tsx`
-- Knowledge graph: `lib/garden.ts`
-- Favicon: `app/icon.svg`
-- SEO and social metadata: `app/layout.tsx`, `app/sitemap.ts`, `app/robots.ts`
+- `SiteProject`
+- `SiteConfig`
+- `Page`
+- `Section`
+- `Component`
+- `ComponentProperty`
+- `Theme`
+- `Navigation`
+- `ContentDocument`
+- `Asset`
+- `PublicationStatus`
+- `ExportManifest`
 
-See [docs/customisation.md](docs/customisation.md).
+The rendered DOM is never the source of truth. See [docs/project-schema.md](docs/project-schema.md) and [docs/architecture.md](docs/architecture.md).
 
-## Deployment
+The editor includes:
 
-### Recommended: Cloudflare Pages Direct Upload
+- stable identifiers;
+- undo and redo;
+- autosave;
+- dirty-state tracking;
+- recovery after interrupted editing;
+- import validation;
+- explicit schema migration;
+- change summaries;
+- validation before export.
 
-Build the public artifact:
+Unknown project, component and property fields use open object schemas so a newer editor can preserve information it does not yet understand.
+
+## Create or import a project
+
+Generate the example project from the legacy example content:
 
 ```bash
-npm run build:public
+npm run project:migrate
 ```
 
-The result is in `out/`.
-
-With Wrangler authenticated:
+Include draft and private records in a local migration when needed:
 
 ```bash
-npx wrangler pages project create styayur-digital-garden --production-branch main
-npx wrangler pages deploy out --project-name=styayur-digital-garden --branch=main
+npm run project:migrate -- --include-unpublished
 ```
 
-Cloudflare receives only `out/`. It does not need access to the private content repository.
-
-See [docs/deployment-cloudflare.md](docs/deployment-cloudflare.md) for the beginner walkthrough, token permissions, GitHub Secrets and rollback.
-
-### Alternative: GitHub Pages
-
-GitHub Pages can host `out/` if the repository or project is configured correctly. Add `.nojekyll` and preserve route folders. The engine's recommended architecture still keeps private content in a private repository and publishes only `out/`.
-
-### Local static server
-
-After `npm run build:public`:
+Validate it:
 
 ```bash
-cd out
-python -m http.server 8080
+npm run project:validate
 ```
 
-Open `http://localhost:8080`.
+In the online editor, use **Import** for a project JSON file or a project `.7z` archive. In the desktop editor, choose a project directory containing `.rhizomaybor/project.json` or `rhizomaybor.project.json`.
 
-## Cloudflare checklist
+## Build a standalone website
 
-1. Create a Cloudflare account.
-2. Find the Account ID under Workers & Pages.
-3. Create a custom API token with **Account → Cloudflare Pages → Edit**.
-4. Limit the token to the correct account.
-5. Store `CLOUDFLARE_ACCOUNT_ID` and `CLOUDFLARE_API_TOKEN` as GitHub Actions secrets in the private content repository.
-6. Create the Pages project.
-7. Push to `main` or run the deployment workflow manually.
-8. Open the Actions run and confirm validation, build and audit passed.
-9. Open the `.pages.dev` URL.
-10. Add a custom domain later, after the default production URL passes smoke tests.
-11. Roll back from the Pages deployment history if needed.
+```bash
+npm run build:project -- --project examples/project/rhizomaybor.project.json --output out-project
+node scripts/serve-static.mjs out-project 4174
+```
 
-Never commit the token to the repository.
+Open `http://127.0.0.1:4174/`.
 
-## Upgrading a pinned engine
+The generated site contains its own HTML, CSS and local runtime files. It does not require Rhizomaybor, Next.js or a server application in production.
 
-The private content repository should not follow `main` automatically. Change the pin deliberately:
+MDX components are intentionally not executed in the standalone builder. Use the source editor to inspect or translate unsupported MDX into supported static HTML before website export.
 
-1. Review the engine changelog.
-2. Change `engine.lock.json` to a released tag or exact commit.
-3. Run content validation.
-4. Run the public build locally.
-5. Review the artifact audit.
-6. Commit the lock change.
-7. Deploy.
-8. Roll back the pin if the content schema changed incompatibly.
+## Export and import
 
-## Troubleshooting
+### Editable project archive
 
-Common symptoms and fixes are in [docs/troubleshooting.md](docs/troubleshooting.md). It covers missing npm commands, old Node versions, failed installs, port conflicts, missing articles, duplicate slugs, invalid frontmatter, broken links, missing images, Cloudflare failures, missing secrets, admin leakage, accidental draft publishing, 404s after export, missing CSS and custom-domain problems.
+```bash
+npm run export:project
+```
 
-## Security and privacy
+The editable archive contains:
 
-Never commit `.env.local`, API tokens, passwords, private keys or private content.
+- `rhizomaybor.project.json`
+- original publication states
+- original Markdown, MDX and HTML source
+- embedded assets
+- `export-manifest.json`
+- file sizes and SHA-256 checksums
 
-Do not put secrets in `NEXT_PUBLIC_*` environment variables. They are included in client-visible output.
+### Publishable website archive
 
-Deleting a file from the current commit does not remove it from Git history. A repository that once contained private material should not simply be made public.
+```bash
+npm run export:website
+```
 
-Once content is publicly deployed, assume it has been copied.
+The public archive contains only:
 
-Preview URLs can also be public. This engine does not automatically publish draft branches.
+- published pages;
+- published sections;
+- published content documents;
+- published assets;
+- generated static files;
+- the export manifest.
 
-Read [docs/security-model.md](docs/security-model.md) for the full threat and boundary model.
+Draft and private pages, sections, documents and assets are listed as excluded in the manifest and are not emitted.
 
-## FAQ
+Both modes use the actual 7z container format. The file signature is verified in tests, and archives are extracted with an independently installed 7-Zip binary.
 
-**Can I use this without Cloudflare?**
-Yes. `npm run build:public` creates a static directory that can be hosted elsewhere.
+## Privacy and publication boundaries
 
-**Can I deploy to GitHub Pages?**
-Yes, but keep private content outside the public engine repository.
+The public website build:
 
-**Do I need a database?**
-No. The public site is static.
+1. accepts only `published/` content from the legacy content contract;
+2. requires frontmatter status to agree with the directory;
+3. excludes draft and private project records;
+4. removes admin and API routes from the public static build;
+5. audits the generated artifact for private canaries, secrets, local paths, source maps and forbidden routes.
 
-**Can I keep my notes private?**
-Yes. Put them in `drafts/` or `private/` and never bypass the publication gate.
+Do not put secrets in `NEXT_PUBLIC_*` variables. They are compiled into client-visible output.
 
-**Can contributors see my private content?**
-They can see the public engine. They cannot see a separate private repository unless you grant access.
+GitHub Pages cannot write arbitrary changes back to a repository. Rhizomaybor therefore uses explicit local import/export and never pretends the static editor has repository write access.
 
-**Can I use plain Markdown instead of MDX?**
-Yes. Both `.md` and `.mdx` are supported for content entries.
+## Development
 
-**Can I remove the knowledge graph?**
-Yes. Remove the component from `app/page.tsx` and the `/garden` route if you do not want it.
+Requirements:
 
-**Can I change fonts and theme?**
-Yes. Edit `tailwind.config.ts`, `app/globals.css` and `app/layout.tsx`.
+- Node.js 22
+- npm 10+
+- Rust and Cargo for desktop builds
+- WebView2 on Windows
+- an independently installed 7z-compatible extractor for the archive round-trip test
 
-**Can I use a custom domain?**
-Yes. Configure it in Cloudflare Pages after the default URL works.
+```bash
+npm ci
+npm run typecheck
+npm test
+npm run test:e2e:install
+npm run build:example
+npm run build:pages
+npm run build:example
+npm run test:e2e
+```
 
-**Can I use it without `/admin`?**
-Yes. The public static build already excludes `/admin` and `/api`.
+The last `build:example` restores the root-path static output after the subpath build.
 
-**Can I keep content in another repository?**
-Yes. That is the recommended private-content architecture.
+Useful commands:
 
-**Why separate engine and content?**
-It keeps private material away from a public repository and gives the public artifact one auditable path.
+```bash
+npm run dev
+npm run test:unit
+npm run test:e2e
+npm run project:validate
+npm run build:project
+npm run export:project
+npm run export:website
+npm run verify:7z -- <archive.7z> <project|website>
+npm run desktop:test
+npm run desktop:build
+```
+
+## Project structure
+
+```text
+app/editor/                 Online editor route
+components/editor/          Shared visual editor UI
+lib/project/                Schema, migrations, editor state, rendering, export
+examples/project/           Generated example SiteProject
+scripts/                    Migration, validation, build, archive and test servers
+src-tauri/                  Desktop shell and filesystem commands
+tests/unit/                 Schema, editor, HTML, autosave, publication and 7z tests
+tests/e2e/                  Playwright browser workflows
+docs/                       Architecture, migration, desktop, export and user guides
+```
+
+The original Markdown/MDX website remains supported through the legacy content contract and publication gate.
 
 ## Documentation
 
 - [Architecture](docs/architecture.md)
-- [Private content](docs/private-content.md)
-- [Cloudflare deployment](docs/deployment-cloudflare.md)
-- [Content schema](docs/content-schema.md)
-- [Customisation](docs/customisation.md)
+- [Project schema](docs/project-schema.md)
+- [User guide](docs/user-guide.md)
+- [Migration guide](docs/migration.md)
+- [Desktop guide](docs/desktop.md)
+- [Export format](docs/export-format.md)
+- [MarkText and Muya integration](docs/marktext-integration.md)
+- [Legacy content schema](docs/content-schema.md)
 - [Security model](docs/security-model.md)
-- [Troubleshooting](docs/troubleshooting.md)
+- [Third-party notices](docs/third-party-notices.md)
+- [Test report](docs/test-report.md)
+- [v0.5.0 release notes](docs/release-v0.5.0.md)
 
-## Glossary
+## Known limitations
 
-**Repository:** a Git project containing files and their version history.
-**Clone:** a local copy of a repository.
-**Fork:** a personal copy of someone else's repository on GitHub.
-**Branch:** a named line of Git history.
-**Commit:** a recorded snapshot of changes.
-**Pull request:** a proposal to merge changes into a branch.
-**Engine:** the reusable software in this repository.
-**Content:** posts, projects, library entries and assets.
-**Source of truth:** the files that must be edited to change the site.
-**Dependency:** a package the project needs to run.
-**Version pinning:** selecting an exact version or commit instead of always using the newest code.
-**Static site:** a website made from files that do not need an application server for each request.
-**Build:** the process that turns source files into a deployable site.
-**Artifact:** the generated output, usually `out/`.
-**Publication gate:** validation and staging software that decides what may enter a public build.
-**CI:** continuous integration, usually automated checks on every push or pull request.
-**CD:** continuous delivery or deployment.
-**GitHub Actions:** GitHub's automation service.
-**Runner:** the machine that executes a GitHub Actions job.
-**Secret:** an encrypted value used by automation and never printed.
-**Deployment:** publishing an artifact to a hosting service.
-**Production:** the live public site.
-**Preview:** a non-production deployment. Preview URLs may still be public.
-**Cloudflare Pages:** a static hosting service from Cloudflare.
-**Wrangler:** Cloudflare's command-line deployment tool.
-**Custom domain:** a domain such as `garden.example.com`.
-**Rollback:** restoring a previous deployment or code version.
-
-## Roadmap
-
-### Current
-
-- Static-first MDX engine with a public-code/private-content boundary.
-- Cloudflare Pages direct-upload deployment path.
-
-### Next
-
-- Publish a live demo and harden the documentation index.
-- Document the pinned-engine upgrade path.
-
-### Future
-
-- A plugin/theme system and richer publication pipeline.
-
-### Not planned
-
-- SaaS hosting, user accounts, or analytics.
-
-## Community
-
-Questions, design discussion and early feedback are welcome in the Discord community:
-
-https://discord.gg/wA2xy6VPK
-
-This is not an SLA support channel. Security reports do not belong in Discord; use the private vulnerability reporting link in [SECURITY.md](SECURITY.md).
-
-## Contributing
-
-Read [CONTRIBUTING.md](CONTRIBUTING.md) and [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) before opening a pull request.
-
-The project uses Dependabot for npm and GitHub Actions updates.
+- The standalone website generator does not execute MDX components.
+- The visual component set is intentionally smaller than arbitrary HTML/CSS.
+- Unsupported HTML structures use source editing rather than promising perfect visual fidelity.
+- The online editor cannot save directly into a Git repository.
+- Desktop installers are currently unsigned unless a code-signing environment is supplied.
+- The GitHub Pages deployment requires the repository Pages environment to permit Actions deployments.
+- A release candidate is appropriate if desktop packaging or any required external deployment check remains unverified.
 
 ## License
 
-Mozilla Public License 2.0. See [LICENSE](LICENSE).
-
-Originally created by Stya Yur.
-
+Rhizomaybor is licensed under the Mozilla Public License 2.0. User-provided content and assets are not automatically relicensed by being edited or exported with Rhizomaybor. Third-party components retain their own licenses; see [docs/third-party-notices.md](docs/third-party-notices.md).

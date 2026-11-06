@@ -1,6 +1,7 @@
 import { ProjectStatusBadge } from '@/components/ProjectStatusBadge';
 import { TechPill } from '@/components/TechPill';
 import type { Project } from '@/lib/projects';
+import { withBasePath } from '@/lib/base-path';
 
 interface ProjectCardProps {
   project: Project;
@@ -25,7 +26,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
         <div className="mt-4 overflow-hidden rounded-lg border border-line bg-bg">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src={project.image}
+            src={withBasePath(project.image)}
             alt={`${project.name} screenshot`}
             className="h-40 w-full object-cover"
             loading="lazy"
