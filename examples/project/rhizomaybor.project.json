@@ -1,0 +1,855 @@
+{
+  "schemaVersion": "0.5.0",
+  "projectVersion": "0.5.0",
+  "id": "project-rhizomaybor-demo",
+  "slug": "rhizomaybor-demo",
+  "name": "Rhizomaybor Demo Garden",
+  "description": "A reusable demonstration project generated from the example content.",
+  "status": "published",
+  "createdAt": "2026-11-06T00:00:00.000Z",
+  "updatedAt": "2026-11-06T00:00:00.000Z",
+  "config": {
+    "name": "Rhizomaybor",
+    "title": "Rhizomaybor Demo Garden",
+    "description": "A sample digital garden for essays, projects and reading notes.",
+    "author": "Alex Example",
+    "locale": "en_GB",
+    "url": "https://example.com",
+    "basePath": "",
+    "socials": {
+      "github": "",
+      "email": "",
+      "website": ""
+    },
+    "footer": "A fictional demonstration project. Built with Rhizomaybor."
+  },
+  "theme": {
+    "id": "theme-garden",
+    "name": "Garden dusk",
+    "mode": "dark",
+    "colors": {
+      "background": "#0b0d10",
+      "surface": "#12161b",
+      "text": "#f3efe6",
+      "muted": "#a7a29a",
+      "accent": "#c9a227",
+      "border": "#292e35"
+    },
+    "typography": {
+      "heading": "serif",
+      "body": "sans",
+      "scale": "balanced"
+    },
+    "spacing": "cozy",
+    "radius": "soft",
+    "contentWidth": "regular"
+  },
+  "navigation": {
+    "id": "navigation-main",
+    "items": [
+      {
+        "id": "nav-home",
+        "label": "Home",
+        "href": "/",
+        "pageId": "page-home",
+        "order": 0,
+        "status": "published"
+      },
+      {
+        "id": "nav-writing",
+        "label": "Writing",
+        "href": "/writing/",
+        "pageId": "page-writing",
+        "order": 1,
+        "status": "published"
+      },
+      {
+        "id": "nav-projects",
+        "label": "Projects",
+        "href": "/projects/",
+        "pageId": "page-projects",
+        "order": 2,
+        "status": "published"
+      },
+      {
+        "id": "nav-library",
+        "label": "Library",
+        "href": "/library/",
+        "pageId": "page-library",
+        "order": 3,
+        "status": "published"
+      },
+      {
+        "id": "nav-about",
+        "label": "About",
+        "href": "/about/",
+        "pageId": "page-about",
+        "order": 4,
+        "status": "published"
+      }
+    ]
+  },
+  "pages": [
+    {
+      "id": "page-home",
+      "slug": "/",
+      "title": "Home",
+      "description": "A demo digital garden built with Rhizomaybor.",
+      "status": "published",
+      "navigationLabel": "Home",
+      "order": 0,
+      "sections": [
+        {
+          "id": "section-home-hero",
+          "type": "feature",
+          "label": "Feature",
+          "status": "published",
+          "layout": "split",
+          "variant": "editorial",
+          "components": [
+            {
+              "id": "component-home-hero",
+              "type": "hero",
+              "version": "1.0.0",
+              "label": "Hero",
+              "props": {
+                "eyebrow": {
+                  "id": "prop-eyebrow-c65a388f69ab",
+                  "key": "eyebrow",
+                  "type": "text",
+                  "value": "Rhizomaybor demo",
+                  "label": "Eyebrow",
+                  "preserveUnknown": true
+                },
+                "title": {
+                  "id": "prop-title-fb7e5bacc883",
+                  "key": "title",
+                  "type": "text",
+                  "value": "A digital garden that stays yours",
+                  "label": "Title",
+                  "preserveUnknown": true
+                },
+                "description": {
+                  "id": "prop-description-8e537bf58845",
+                  "key": "description",
+                  "type": "rich-text",
+                  "value": "<p>Edit content and supported layout in place, then export a portable website with genuine 7z archives.</p>",
+                  "label": "Description",
+                  "preserveUnknown": true
+                },
+                "ctaLabel": {
+                  "id": "prop-ctalabel-dfaffc1ce89a",
+                  "key": "ctaLabel",
+                  "type": "link",
+                  "value": "Browse writing",
+                  "label": "Button label",
+                  "preserveUnknown": true
+                },
+                "ctaHref": {
+                  "id": "prop-ctahref-6b82833d3834",
+                  "key": "ctaHref",
+                  "type": "link",
+                  "value": "/writing/",
+                  "label": "Button link",
+                  "preserveUnknown": true
+                }
+              },
+              "settings": {}
+            }
+          ],
+          "settings": {}
+        },
+        {
+          "id": "section-home-writing",
+          "type": "collection",
+          "label": "Collection",
+          "status": "published",
+          "layout": "grid-3",
+          "variant": "writing",
+          "components": [
+            {
+              "id": "component-home-writing",
+              "type": "collection",
+              "version": "1.0.0",
+              "label": "Document collection",
+              "props": {
+                "kind": {
+                  "id": "prop-kind-8eb173341c83",
+                  "key": "kind",
+                  "type": "select",
+                  "value": "post",
+                  "label": "Document kind",
+                  "preserveUnknown": true
+                },
+                "title": {
+                  "id": "prop-title-afff8d1c9acd",
+                  "key": "title",
+                  "type": "text",
+                  "value": "Latest writing",
+                  "label": "Heading",
+                  "preserveUnknown": true
+                },
+                "limit": {
+                  "id": "prop-limit-4361f8af80d4",
+                  "key": "limit",
+                  "type": "number",
+                  "value": 3,
+                  "label": "Maximum items",
+                  "preserveUnknown": true
+                }
+              },
+              "settings": {}
+            }
+          ],
+          "settings": {}
+        },
+        {
+          "id": "section-home-note",
+          "type": "content",
+          "label": "Content",
+          "status": "published",
+          "layout": "narrow",
+          "variant": "soft-panel",
+          "components": [
+            {
+              "id": "component-home-guide",
+              "type": "callout",
+              "version": "1.0.0",
+              "label": "Callout",
+              "props": {
+                "title": {
+                  "id": "prop-title-13250527a7e3",
+                  "key": "title",
+                  "type": "text",
+                  "value": "Constrained by design",
+                  "label": "Title",
+                  "preserveUnknown": true
+                },
+                "body": {
+                  "id": "prop-body-5740c9432e86",
+                  "key": "body",
+                  "type": "rich-text",
+                  "value": "<p>Components and layouts come from a supported registry. Unknown HTML stays in source mode rather than being silently discarded.</p>",
+                  "label": "Body",
+                  "preserveUnknown": true
+                },
+                "tone": {
+                  "id": "prop-tone-4ff6f867b4c0",
+                  "key": "tone",
+                  "type": "select",
+                  "value": "guide",
+                  "label": "Tone",
+                  "preserveUnknown": true
+                }
+              },
+              "settings": {}
+            }
+          ],
+          "settings": {}
+        }
+      ],
+      "seo": {
+        "noIndex": false
+      }
+    },
+    {
+      "id": "page-writing",
+      "slug": "/writing/",
+      "title": "Writing",
+      "description": "Essays and notes from the garden.",
+      "status": "published",
+      "navigationLabel": "Writing",
+      "order": 1,
+      "sections": [
+        {
+          "id": "section-writing-intro",
+          "type": "content",
+          "label": "Content",
+          "status": "published",
+          "layout": "narrow",
+          "variant": "plain",
+          "components": [
+            {
+              "id": "component-writing-heading",
+              "type": "heading",
+              "version": "1.0.0",
+              "label": "Heading",
+              "props": {
+                "title": {
+                  "id": "prop-title-d8c9c3a14b91",
+                  "key": "title",
+                  "type": "text",
+                  "value": "Writing",
+                  "label": "Heading",
+                  "preserveUnknown": true
+                },
+                "level": {
+                  "id": "prop-level-82f159911e8b",
+                  "key": "level",
+                  "type": "select",
+                  "value": "2",
+                  "label": "Level",
+                  "preserveUnknown": true
+                },
+                "description": {
+                  "id": "prop-description-f0e63d1ef7e8",
+                  "key": "description",
+                  "type": "rich-text",
+                  "value": "<p>Notes in progress and essays that have settled.</p>",
+                  "label": "Description",
+                  "preserveUnknown": true
+                }
+              },
+              "settings": {}
+            }
+          ],
+          "settings": {}
+        },
+        {
+          "id": "section-writing-list",
+          "type": "collection",
+          "label": "Collection",
+          "status": "published",
+          "layout": "list",
+          "variant": "writing",
+          "components": [
+            {
+              "id": "component-writing-list",
+              "type": "collection",
+              "version": "1.0.0",
+              "label": "Document collection",
+              "props": {
+                "kind": {
+                  "id": "prop-kind-10e63c09578a",
+                  "key": "kind",
+                  "type": "select",
+                  "value": "post",
+                  "label": "Document kind",
+                  "preserveUnknown": true
+                },
+                "title": {
+                  "id": "prop-title-496d7ce98655",
+                  "key": "title",
+                  "type": "text",
+                  "value": "All writing",
+                  "label": "Heading",
+                  "preserveUnknown": true
+                },
+                "limit": {
+                  "id": "prop-limit-8eeeedc8a9ff",
+                  "key": "limit",
+                  "type": "number",
+                  "value": 24,
+                  "label": "Maximum items",
+                  "preserveUnknown": true
+                }
+              },
+              "settings": {}
+            }
+          ],
+          "settings": {}
+        }
+      ],
+      "seo": {
+        "noIndex": false
+      }
+    },
+    {
+      "id": "page-projects",
+      "slug": "/projects/",
+      "title": "Projects",
+      "description": "Selected projects and experiments.",
+      "status": "published",
+      "navigationLabel": "Projects",
+      "order": 2,
+      "sections": [
+        {
+          "id": "section-projects-intro",
+          "type": "content",
+          "label": "Content",
+          "status": "published",
+          "layout": "narrow",
+          "variant": "plain",
+          "components": [
+            {
+              "id": "component-projects-heading",
+              "type": "heading",
+              "version": "1.0.0",
+              "label": "Heading",
+              "props": {
+                "title": {
+                  "id": "prop-title-5594cd68d903",
+                  "key": "title",
+                  "type": "text",
+                  "value": "Projects",
+                  "label": "Heading",
+                  "preserveUnknown": true
+                },
+                "level": {
+                  "id": "prop-level-deda83796045",
+                  "key": "level",
+                  "type": "select",
+                  "value": "2",
+                  "label": "Level",
+                  "preserveUnknown": true
+                },
+                "description": {
+                  "id": "prop-description-adf1cff97f62",
+                  "key": "description",
+                  "type": "rich-text",
+                  "value": "<p>Small systems, tools and field notes.</p>",
+                  "label": "Description",
+                  "preserveUnknown": true
+                }
+              },
+              "settings": {}
+            }
+          ],
+          "settings": {}
+        },
+        {
+          "id": "section-projects-list",
+          "type": "collection",
+          "label": "Collection",
+          "status": "published",
+          "layout": "grid-2",
+          "variant": "projects",
+          "components": [
+            {
+              "id": "component-projects-list",
+              "type": "collection",
+              "version": "1.0.0",
+              "label": "Document collection",
+              "props": {
+                "kind": {
+                  "id": "prop-kind-e9f2e6394851",
+                  "key": "kind",
+                  "type": "select",
+                  "value": "project",
+                  "label": "Document kind",
+                  "preserveUnknown": true
+                },
+                "title": {
+                  "id": "prop-title-2ff16b32dd70",
+                  "key": "title",
+                  "type": "text",
+                  "value": "Project index",
+                  "label": "Heading",
+                  "preserveUnknown": true
+                },
+                "limit": {
+                  "id": "prop-limit-14e3285876e6",
+                  "key": "limit",
+                  "type": "number",
+                  "value": 12,
+                  "label": "Maximum items",
+                  "preserveUnknown": true
+                }
+              },
+              "settings": {}
+            }
+          ],
+          "settings": {}
+        }
+      ],
+      "seo": {
+        "noIndex": false
+      }
+    },
+    {
+      "id": "page-library",
+      "slug": "/library/",
+      "title": "Library",
+      "description": "Reading notes and quotations.",
+      "status": "published",
+      "navigationLabel": "Library",
+      "order": 3,
+      "sections": [
+        {
+          "id": "section-library-intro",
+          "type": "content",
+          "label": "Content",
+          "status": "published",
+          "layout": "narrow",
+          "variant": "plain",
+          "components": [
+            {
+              "id": "component-library-heading",
+              "type": "heading",
+              "version": "1.0.0",
+              "label": "Heading",
+              "props": {
+                "title": {
+                  "id": "prop-title-07e8a3609349",
+                  "key": "title",
+                  "type": "text",
+                  "value": "Library",
+                  "label": "Heading",
+                  "preserveUnknown": true
+                },
+                "level": {
+                  "id": "prop-level-46139c7b52c9",
+                  "key": "level",
+                  "type": "select",
+                  "value": "2",
+                  "label": "Level",
+                  "preserveUnknown": true
+                },
+                "description": {
+                  "id": "prop-description-bc9517a4262d",
+                  "key": "description",
+                  "type": "rich-text",
+                  "value": "<p>Books, notes and passages worth returning to.</p>",
+                  "label": "Description",
+                  "preserveUnknown": true
+                }
+              },
+              "settings": {}
+            }
+          ],
+          "settings": {}
+        },
+        {
+          "id": "section-library-list",
+          "type": "collection",
+          "label": "Collection",
+          "status": "published",
+          "layout": "grid-3",
+          "variant": "library",
+          "components": [
+            {
+              "id": "component-library-list",
+              "type": "collection",
+              "version": "1.0.0",
+              "label": "Document collection",
+              "props": {
+                "kind": {
+                  "id": "prop-kind-7a248f0a9881",
+                  "key": "kind",
+                  "type": "select",
+                  "value": "library",
+                  "label": "Document kind",
+                  "preserveUnknown": true
+                },
+                "title": {
+                  "id": "prop-title-9cdf7233bcf5",
+                  "key": "title",
+                  "type": "text",
+                  "value": "Reading shelf",
+                  "label": "Heading",
+                  "preserveUnknown": true
+                },
+                "limit": {
+                  "id": "prop-limit-8acf16e4abf2",
+                  "key": "limit",
+                  "type": "number",
+                  "value": 24,
+                  "label": "Maximum items",
+                  "preserveUnknown": true
+                }
+              },
+              "settings": {}
+            }
+          ],
+          "settings": {}
+        }
+      ],
+      "seo": {
+        "noIndex": false
+      }
+    },
+    {
+      "id": "page-about",
+      "slug": "/about/",
+      "title": "About",
+      "description": "About this fictional garden.",
+      "status": "published",
+      "navigationLabel": "About",
+      "order": 4,
+      "sections": [
+        {
+          "id": "section-about-content",
+          "type": "content",
+          "label": "Content",
+          "status": "published",
+          "layout": "narrow",
+          "variant": "plain",
+          "components": [
+            {
+              "id": "component-about-content",
+              "type": "richText",
+              "version": "1.0.0",
+              "label": "Rich text",
+              "props": {
+                "format": {
+                  "id": "prop-format-d262afc8ad10",
+                  "key": "format",
+                  "type": "select",
+                  "value": "html",
+                  "label": "Content format",
+                  "preserveUnknown": true
+                },
+                "body": {
+                  "id": "prop-body-dcbf42a35db9",
+                  "key": "body",
+                  "type": "rich-text",
+                  "value": "<p>This fictional profile demonstrates direct HTML editing in a supported garden section.</p>\n<aside class=\"about-note\" data-preserved=\"true\"><strong>Preserved structure.</strong> Unknown safe elements and data attributes travel with the document.</aside>\n<rhizome-note data-preserved=\"true\">This custom element remains in source mode until it is intentionally converted.</rhizome-note>\n<h2>How this project is organised</h2>\n<p>Content, layout, theme and publication state are separate. The editor changes a stable project model, never the rendered DOM.</p>\n<ul><li>Writing and project notes remain portable.</li><li>Drafts and private records are excluded from publishable exports.</li><li>Source mode remains available when a visual block needs special handling.</li></ul>",
+                  "label": "Content",
+                  "preserveUnknown": true
+                },
+                "documentId": {
+                  "id": "prop-documentid-88618abcd520",
+                  "key": "documentId",
+                  "type": "text",
+                  "value": "doc-about-profile",
+                  "label": "Linked document",
+                  "preserveUnknown": true
+                }
+              },
+              "settings": {}
+            }
+          ],
+          "settings": {}
+        }
+      ],
+      "seo": {
+        "noIndex": false
+      }
+    }
+  ],
+  "contentDocuments": [
+    {
+      "id": "doc-post-building-a-garden",
+      "kind": "post",
+      "slug": "building-a-garden",
+      "title": "Building a Garden",
+      "description": "A short example essay that explains how the demo content is organised.",
+      "date": "2026-09-12",
+      "tags": [
+        "digital-garden",
+        "publishing"
+      ],
+      "status": "published",
+      "format": "mdx",
+      "body": "# Building a garden\r\n\r\nA digital garden is a place for work that changes. Published pages can be revised, linked and allowed to mature.\r\n\r\n![A simple leaf illustration](/garden-assets/leaf.svg)\r\n\r\nThis example lives in `examples/content/published/posts`. Drafts and private notes are staged by the publication gate only when their status and directory both allow it.",
+      "sourceFormat": "mdx",
+      "unsupportedHtml": [],
+      "metadata": {
+        "title": "Building a Garden",
+        "slug": "building-a-garden",
+        "date": "2026-09-12",
+        "status": "published",
+        "description": "A short example essay that explains how the demo content is organised.",
+        "tags": [
+          "digital-garden",
+          "publishing"
+        ],
+        "maturity": "seedling"
+      }
+    },
+    {
+      "id": "doc-post-notes-on-slow-software",
+      "kind": "post",
+      "slug": "notes-on-slow-software",
+      "title": "Notes on Slow Software",
+      "description": "Small notes about software that values durability over novelty.",
+      "date": "2026-08-04",
+      "tags": [
+        "software",
+        "craft"
+      ],
+      "status": "published",
+      "format": "mdx",
+      "body": "# Notes on slow software\r\n\r\nSlow software does not mean software that feels sluggish. It means software whose design can survive a change in fashion.\r\n\r\n- Prefer plain formats.\r\n- Keep the publishing boundary visible.\r\n- Make upgrades deliberate.\r\n- Leave room for repair.",
+      "sourceFormat": "mdx",
+      "unsupportedHtml": [],
+      "metadata": {
+        "title": "Notes on Slow Software",
+        "slug": "notes-on-slow-software",
+        "date": "2026-08-04",
+        "status": "published",
+        "description": "Small notes about software that values durability over novelty.",
+        "tags": [
+          "software",
+          "craft"
+        ],
+        "maturity": "budding"
+      }
+    },
+    {
+      "id": "doc-project-field-notes",
+      "kind": "project",
+      "slug": "field-notes",
+      "title": "Field Notes",
+      "description": "A fictional project used to demonstrate the project index.",
+      "date": "2026-07-18",
+      "tags": [
+        "project",
+        "demo"
+      ],
+      "status": "published",
+      "format": "mdx",
+      "body": "Field Notes is fictional demo content. Replace it with a project of your own.",
+      "sourceFormat": "mdx",
+      "unsupportedHtml": [],
+      "metadata": {
+        "title": "Field Notes",
+        "slug": "field-notes",
+        "date": "2026-07-18",
+        "status": "published",
+        "description": "A fictional project used to demonstrate the project index.",
+        "tags": [
+          "project",
+          "demo"
+        ],
+        "name": "Field Notes",
+        "summary": "A small example project about collecting observations as plain text.",
+        "year": "2026",
+        "projectStatus": "experimental",
+        "category": "concepts",
+        "featured": false,
+        "priority": 0,
+        "stack": [
+          "TypeScript",
+          "Markdown"
+        ],
+        "links": [
+          {
+            "label": "Example link",
+            "url": "https://example.com"
+          }
+        ]
+      }
+    },
+    {
+      "id": "doc-library-a-note-on-small-systems",
+      "kind": "library",
+      "slug": "a-note-on-small-systems",
+      "title": "A note on small systems",
+      "description": "A short library note about composable tools.",
+      "date": "2026-05-10",
+      "tags": [
+        "systems",
+        "notes"
+      ],
+      "status": "published",
+      "format": "markdown",
+      "body": "Small systems are easier to inspect, replace and understand.",
+      "sourceFormat": "markdown",
+      "unsupportedHtml": [],
+      "metadata": {
+        "title": "A note on small systems",
+        "slug": "a-note-on-small-systems",
+        "date": "2026-05-10",
+        "status": "published",
+        "description": "A short library note about composable tools.",
+        "tags": [
+          "systems",
+          "notes"
+        ],
+        "kind": "note"
+      }
+    },
+    {
+      "id": "doc-library-design-of-everyday-things",
+      "kind": "library",
+      "slug": "design-of-everyday-things",
+      "title": "The Design of Everyday Things",
+      "description": "A reading note about affordances, feedback and discoverability.",
+      "date": "2026-06-21",
+      "tags": [
+        "design",
+        "reading"
+      ],
+      "status": "published",
+      "format": "markdown",
+      "body": "A fictionalised reading note for the public example.",
+      "sourceFormat": "markdown",
+      "unsupportedHtml": [],
+      "metadata": {
+        "title": "The Design of Everyday Things",
+        "slug": "design-of-everyday-things",
+        "date": "2026-06-21",
+        "status": "published",
+        "description": "A reading note about affordances, feedback and discoverability.",
+        "tags": [
+          "design",
+          "reading"
+        ],
+        "kind": "book",
+        "author": "Don Norman",
+        "readingStatus": "reading",
+        "note": "A useful reminder that good design makes the next action visible."
+      }
+    },
+    {
+      "id": "doc-library-sample-quote",
+      "kind": "library",
+      "slug": "sample-quote",
+      "title": "A sample quote",
+      "description": "A fictional quote used by the demo.",
+      "date": "2026-04-03",
+      "tags": [
+        "quote"
+      ],
+      "status": "published",
+      "format": "markdown",
+      "body": "The useful part of a garden is not its completeness, but its willingness to grow.",
+      "sourceFormat": "markdown",
+      "unsupportedHtml": [],
+      "metadata": {
+        "title": "A sample quote",
+        "slug": "sample-quote",
+        "date": "2026-04-03",
+        "status": "published",
+        "description": "A fictional quote used by the demo.",
+        "tags": [
+          "quote"
+        ],
+        "kind": "quote",
+        "author": "Example Author"
+      }
+    },
+    {
+      "id": "doc-about-profile",
+      "kind": "about",
+      "slug": "about",
+      "title": "About this garden",
+      "description": "A direct HTML content document.",
+      "tags": [],
+      "status": "published",
+      "format": "html",
+      "body": "<p>This fictional profile demonstrates direct HTML editing in a supported garden section.</p>\n<aside class=\"about-note\" data-preserved=\"true\"><strong>Preserved structure.</strong> Unknown safe elements and data attributes travel with the document.</aside>\n<rhizome-note data-preserved=\"true\">This custom element remains in source mode until it is intentionally converted.</rhizome-note>\n<h2>How this project is organised</h2>\n<p>Content, layout, theme and publication state are separate. The editor changes a stable project model, never the rendered DOM.</p>\n<ul><li>Writing and project notes remain portable.</li><li>Drafts and private records are excluded from publishable exports.</li><li>Source mode remains available when a visual block needs special handling.</li></ul>",
+      "sourceFormat": "html",
+      "unsupportedHtml": [
+        "rhizome-note"
+      ],
+      "metadata": {}
+    }
+  ],
+  "assets": [
+    {
+      "id": "asset-leaf",
+      "path": "leaf.svg",
+      "name": "leaf.svg",
+      "mediaType": "image/svg+xml",
+      "status": "published",
+      "size": 362,
+      "alt": "A small botanical leaf mark",
+      "dataBase64": "PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNjAgMTIwIiByb2xlPSJpbWciIGFyaWEtbGFiZWw9IkxlYWYgaWxsdXN0cmF0aW9uIj4NCiAgPHJlY3Qgd2lkdGg9IjE2MCIgaGVpZ2h0PSIxMjAiIGZpbGw9IiNmNGYxZWEiLz4NCiAgPHBhdGggZD0iTTI4IDkzYzM1LTcgNjEtMjggNzgtNjQgNiAyMyAwIDUxLTE5IDY3LTE2IDE0LTM5IDE0LTU5LTNaIiBmaWxsPSIjN2FhNTdjIi8+DQogIDxwYXRoIGQ9Ik0zNSA5MWMyMS0xNCA0MC0zMyA1OC01OCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMjk0YjM2IiBzdHJva2Utd2lkdGg9IjMiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPg0KPC9zdmc+DQo="
+    }
+  ],
+  "contentRefs": [
+    {
+      "id": "ref-about",
+      "documentId": "doc-about-profile",
+      "label": "About content",
+      "format": "html"
+    }
+  ],
+  "migrations": [],
+  "metadata": {
+    "generatedFrom": "examples/content",
+    "legacySourcePreserved": true
+  }
+}

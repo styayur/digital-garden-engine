@@ -27,7 +27,7 @@ Store the token as the GitHub Actions secret `CLOUDFLARE_API_TOKEN`. Do not use 
 With Wrangler authenticated locally:
 
 ```bash
-npx wrangler pages project create styayur-digital-garden --production-branch main
+npx wrangler pages project create rhizomaybor --production-branch main
 ```
 
 The private workflow can also create the project when the token has Pages Edit permission.
@@ -43,7 +43,7 @@ CLOUDFLARE_ACCOUNT_ID
 CLOUDFLARE_API_TOKEN
 ```
 
-Optionally add a repository variable named `CLOUDFLARE_PAGES_PROJECT`. If omitted, the workflow uses `styayur-digital-garden`.
+Optionally add a repository variable named `CLOUDFLARE_PAGES_PROJECT`. If omitted, the workflow uses `rhizomaybor`.
 
 ## 6. Deploy
 
@@ -51,16 +51,16 @@ Push to `main` or run the deploy workflow manually. The workflow builds and depl
 
 ```bash
 npx wrangler pages deploy out \
-  --project-name=styayur-digital-garden \
+  --project-name=rhizomaybor \
   --branch=main
 ```
 
 ## 7. Find the production URL
 
-Open **Cloudflare Dashboard → Workers & Pages → styayur-digital-garden**. The production URL normally looks like:
+Open **Cloudflare Dashboard → Workers & Pages → rhizomaybor**. The production URL normally looks like:
 
 ```text
-https://styayur-digital-garden.pages.dev
+https://rhizomaybor.pages.dev
 ```
 
 ## 8. Custom domain

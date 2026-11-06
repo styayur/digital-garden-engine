@@ -10,7 +10,7 @@ Do not open a public issue for a vulnerability or suspected privacy leak.
 
 Use GitHub's private vulnerability reporting form:
 
-https://github.com/styayur/digital-garden-engine/security/advisories/new
+https://github.com/styayur/rhizomaybor/security/advisories/new
 
 Include the affected version or commit, reproduction steps, expected impact and any suggested mitigation. Do not include real private notes, credentials or personal data in the report.
 

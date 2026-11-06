@@ -1,0 +1,80 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+
+jobs:
+  web-artifacts:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: sudo apt-get update && sudo apt-get install -y 7zip p7zip-full
+      - run: npm test
+      - run: npm run build:example
+      - run: npm run build:pages
+      - run: npm run export:project
+      - run: npm run export:website
+      - uses: actions/upload-artifact@v7
+        with:
+          name: rhizomaybor-web-release
+          path: |
+            release-samples/*.7z
+            release-samples/*.sha256
+            release-samples/*manifest.json
+          if-no-files-found: error
+
+  desktop-installer:
+    runs-on: windows-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: npm
+      - uses: dtolnay/rust-toolchain@stable
+      - uses: swatinem/rust-cache@v2
+        with:
+          workspaces: src-tauri
+      - run: npm ci
+      - run: npm run desktop:test
+      - run: npm run desktop:build
+      - uses: actions/upload-artifact@v7
+        with:
+          name: rhizomaybor-desktop-release
+          path: src-tauri/target/release/bundle/nsis/*
+          if-no-files-found: error
+
+  publish:
+    needs: [web-artifacts, desktop-installer]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v7
+        with:
+          path: release-files
+          merge-multiple: true
+      - name: Generate combined SHA-256 checksums
+        run: |
+          cd release-files
+          find . -maxdepth 1 -type f ! -name '*sha256sums.txt' ! -name '*.sha256' -printf '%f\n' | sort | xargs sha256sum > rhizomaybor-0.5.0-sha256sums.txt
+      - name: Publish GitHub Release
+        uses: softprops/action-gh-release@v3
+        with:
+          files: release-files/**/*
+          generate_release_notes: true
+          prerelease: true
+          body: |
+            Rhizomaybor v0.5.0 release candidate.
+
+            The release includes genuine 7z editable-project and publishable-website archives, SHA-256 checksums, and the Windows desktop installer. Review the repository test report and known limitations before treating this as a stable production release.

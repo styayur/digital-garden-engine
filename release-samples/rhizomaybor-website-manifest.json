@@ -1,0 +1,101 @@
+{
+  "manifestVersion": "1.0.0",
+  "projectVersion": "0.5.0",
+  "schemaVersion": "0.5.0",
+  "archiveMode": "website",
+  "createdAt": "2026-11-06T11:55:34.299Z",
+  "build": {
+    "tool": "rhizomaybor",
+    "toolVersion": "0.5.0",
+    "nodeVersion": "v26.7.0",
+    "platform": "Win32"
+  },
+  "files": [
+    {
+      "path": ".nojekyll",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "404.html",
+      "bytes": 6079,
+      "sha256": "4c55a527a60ef50e6d3a67a129b7531d404c42e7dee17f0f1b384ceff54e4614"
+    },
+    {
+      "path": "about/index.html",
+      "bytes": 7236,
+      "sha256": "1207bc1eb1468b773d693564ad482acd4883499a1dfd73c1573ab59bcbc6c31a"
+    },
+    {
+      "path": "assets/leaf.svg",
+      "bytes": 362,
+      "sha256": "f8c4064155da3d27b58369e1bf6a525d4d2f582c81b04a868719b0b927e6030c"
+    },
+    {
+      "path": "assets/site.css",
+      "bytes": 5318,
+      "sha256": "47ed840e229762cca3cd40f1e6ce70462e94a683c6d375d0c6c491208e53b6b5"
+    },
+    {
+      "path": "assets/site.js",
+      "bytes": 54,
+      "sha256": "3cc0ea52dee164c211a1b8be87e36fdb95aeaa83511f419fc2045bd254a2fda7"
+    },
+    {
+      "path": "documents/about/index.html",
+      "bytes": 7242,
+      "sha256": "0dd1033c23cd66623ab5ac58677b561bda4dbdd823d27753496bf0101d013a8a"
+    },
+    {
+      "path": "index.html",
+      "bytes": 7999,
+      "sha256": "1fd1a43e463532550db8649edee9b243a80b5c70c9f4ac52583de8f5ef1c5756"
+    },
+    {
+      "path": "library/a-note-on-small-systems/index.html",
+      "bytes": 6589,
+      "sha256": "748a97e8a779fa5c5c9aae22bada7a8e9fb62957e95363f0fc6a5a56c085f95d"
+    },
+    {
+      "path": "library/design-of-everyday-things/index.html",
+      "bytes": 6631,
+      "sha256": "863c935e58fb00909f152ea3394673971c70b4a7ae1465a77330d77dd6856330"
+    },
+    {
+      "path": "library/index.html",
+      "bytes": 7606,
+      "sha256": "86796f5350142caa4212d015bd0a66ace7d296300eaf7fc1df0bfd6078bcdf22"
+    },
+    {
+      "path": "library/sample-quote/index.html",
+      "bytes": 6574,
+      "sha256": "d2b952816295a1cb13579d33d2c4ebec0ad1991dca9c3645d294be0eb7829a9d"
+    },
+    {
+      "path": "projects/field-notes/index.html",
+      "bytes": 6610,
+      "sha256": "823c5a8bc76ff239103c9b5e2a32a96695fe4d205e52acb45672a74b8d5af0be"
+    },
+    {
+      "path": "projects/index.html",
+      "bytes": 7079,
+      "sha256": "7a1242f5066878a2dfaecc1bf62a909dabd5044556f5d78d607dc9ce15dfe6dc"
+    },
+    {
+      "path": "writing/building-a-garden/index.html",
+      "bytes": 6971,
+      "sha256": "4c6c63ee65bb53581f8d391bba72a1fb772845a1b2526cce11a8d15797f1106d"
+    },
+    {
+      "path": "writing/index.html",
+      "bytes": 7398,
+      "sha256": "8286fa4acb72c15dcf81951d9211214036e24498e11b26190f65b8ab07eb50e8"
+    },
+    {
+      "path": "writing/notes-on-slow-software/index.html",
+      "bytes": 6871,
+      "sha256": "2fa7b089fa97bb33667503887141164eb6149bb3fe894a05d47fa4746815847d"
+    }
+  ],
+  "excluded": []
+}

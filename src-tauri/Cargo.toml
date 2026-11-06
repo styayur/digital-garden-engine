@@ -1,0 +1,25 @@
+[package]
+name = "rhizomaybor-desktop"
+version = "0.5.0"
+description = "Rhizomaybor desktop visual website editor"
+authors = ["Rhizomaybor contributors"]
+edition = "2021"
+license = "MPL-2.0"
+
+[lib]
+name = "rhizomaybor_desktop_lib"
+crate-type = ["staticlib", "cdylib", "rlib"]
+
+[build-dependencies]
+tauri-build = { version = "2", features = [] }
+
+[dependencies]
+tauri = { version = "2", features = [] }
+tauri-plugin-dialog = "2"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+base64 = "0.22"
+
+[features]
+default = ["custom-protocol"]
+custom-protocol = ["tauri/custom-protocol"]

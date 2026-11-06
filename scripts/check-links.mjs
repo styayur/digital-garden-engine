@@ -7,6 +7,7 @@ import { REPO_ROOT, parseArgs, walkFiles } from './lib/content-utils.mjs';
 const args = parseArgs();
 const out = path.resolve(REPO_ROOT, args.output || process.env.DIGITAL_GARDEN_OUTPUT_DIR || 'out');
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://example.com';
+const basePath = (process.env.NEXT_PUBLIC_BASE_PATH || '').replace(/^\/+|\/+$/g, '');
 
 if (!fs.existsSync(out)) {
   console.error(`out directory does not exist: ${out}`);
@@ -22,6 +23,11 @@ function internalTarget(rawHref, fromFile) {
     const site = new URL(siteUrl);
     if (/^https?:/i.test(href) && url.hostname !== site.hostname) return null;
     pathname = decodeURIComponent(url.pathname);
+    if (basePath) {
+      const prefix = `/${basePath}`;
+      if (pathname === prefix) pathname = '/';
+      else if (pathname.startsWith(`${prefix}/`)) pathname = pathname.slice(prefix.length);
+    }
   } catch {
     throw new Error(`Invalid URL ${href} in ${path.relative(out, fromFile)}`);
   }

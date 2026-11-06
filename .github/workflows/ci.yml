@@ -16,7 +16,7 @@ concurrency:
 jobs:
   verify:
     runs-on: ubuntu-latest
-    timeout-minutes: 25
+    timeout-minutes: 45
     env:
       NEXT_PUBLIC_SITE_URL: https://example.com
     steps:
@@ -25,18 +25,40 @@ jobs:
         with:
           node-version: 22
           cache: npm
-      - run: npm ci
+      - name: Install dependencies
+        run: npm ci
+      - name: Install independent 7z extractor
+        run: sudo apt-get update && sudo apt-get install -y 7zip p7zip-full
       - name: Type check
         run: npm run typecheck
-      - name: Unit and publication boundary tests
+      - name: Unit, schema, publication and archive tests
         run: npm test
       - name: Validate example content
         run: npm run content:validate -- --source examples/content
+      - name: Validate shared project
+        run: npm run project:validate
       - name: Build public example
         run: npm run build:example
       - name: Check internal links
         run: npm run check:links
       - name: Audit public artifact
         run: npm run artifact:audit
-
-
+      - name: Build standalone project website
+        run: npm run build:project
+      - name: Build GitHub Pages subpath artifact
+        run: npm run build:pages
+      - name: Restore root-path artifact for browser tests
+        run: npm run build:example
+      - name: Install Playwright Chromium
+        run: npx playwright install --with-deps chromium
+      - name: Real browser workflows
+        run: npm run test:e2e
+      - name: Upload Playwright report
+        if: failure()
+        uses: actions/upload-artifact@v7
+        with:
+          name: playwright-report
+          path: |
+            playwright-report
+            test-results
+          if-no-files-found: ignore

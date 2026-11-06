@@ -1,6 +1,6 @@
 # Contributing
 
-Thank you for improving the Digital Garden Engine.
+Thank you for improving Rhizomaybor.
 
 ## Before opening a pull request
 

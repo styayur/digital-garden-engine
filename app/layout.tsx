@@ -13,6 +13,7 @@ import '@fontsource/inter/500.css';
 import '@fontsource/inter/600.css';
 import '@fontsource/jetbrains-mono/400.css';
 import '@fontsource/jetbrains-mono/500.css';
+import '@muyajs/core/lib/core.css';
 
 import './globals.css';
 
@@ -20,8 +21,7 @@ import {
   CommandProvider,
   type CommandItem,
 } from '@/components/CommandPalette';
-import { Footer } from '@/components/Footer';
-import { Navbar } from '@/components/Navbar';
+import { SiteFrame } from '@/components/SiteFrame';
 import { ThemeProvider } from '@/components/ThemeProvider';
 import { getAllPosts } from '@/lib/posts';
 import { getAllProjects } from '@/lib/projects';
@@ -70,6 +70,13 @@ function buildCommandItems(): CommandItem[] {
       href: item.href,
     })),
     {
+      id: 'page-editor',
+      group: 'Page',
+      label: 'Visual editor',
+      href: '/editor',
+      keywords: ['edit', 'visual', 'build', 'export'],
+    },
+    {
       id: 'page-terminal',
       group: 'Page',
       label: 'Terminal',
@@ -107,11 +114,7 @@ export default function RootLayout({
       <body className="bg-bg font-sans text-ink antialiased">
         <ThemeProvider>
           <CommandProvider items={commandItems}>
-            <div className="flex min-h-screen flex-col">
-              <Navbar />
-              <main className="flex-1">{children}</main>
-              <Footer />
-            </div>
+            <SiteFrame>{children}</SiteFrame>
           </CommandProvider>
         </ThemeProvider>
       </body>

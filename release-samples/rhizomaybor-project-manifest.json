@@ -1,0 +1,31 @@
+{
+  "manifestVersion": "1.0.0",
+  "projectVersion": "0.5.0",
+  "schemaVersion": "0.5.0",
+  "archiveMode": "project",
+  "createdAt": "2026-11-06T11:55:32.839Z",
+  "build": {
+    "tool": "rhizomaybor",
+    "toolVersion": "0.5.0",
+    "nodeVersion": "v26.7.0",
+    "platform": "Win32"
+  },
+  "files": [
+    {
+      "path": "assets/leaf.svg",
+      "bytes": 362,
+      "sha256": "f8c4064155da3d27b58369e1bf6a525d4d2f582c81b04a868719b0b927e6030c"
+    },
+    {
+      "path": "README.txt",
+      "bytes": 185,
+      "sha256": "540548846b084d8cfe61e0fda83ccaa6c05ac101c6cd5ac0a4d5936151db8f06"
+    },
+    {
+      "path": "rhizomaybor.project.json",
+      "bytes": 28148,
+      "sha256": "cb4541691307c46406bb4ecf64985fd8d046f1bf23aa373c2a1ef02216aeae1f"
+    }
+  ],
+  "excluded": []
+}

@@ -2,6 +2,7 @@ import { ArrowUpRightIcon } from '@/components/Icons';
 import { ProjectStatusBadge } from '@/components/ProjectStatusBadge';
 import { TechPill } from '@/components/TechPill';
 import type { Project } from '@/lib/projects';
+import { withBasePath } from '@/lib/base-path';
 
 interface FeaturedProjectCardProps {
   project: Project;
@@ -34,7 +35,7 @@ export function FeaturedProjectCard({ project }: FeaturedProjectCardProps) {
     <div className="aspect-[16/9] overflow-hidden border-b border-line bg-bg">
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
-        src={project.image}
+        src={withBasePath(project.image)}
         alt={`${project.name} screenshot`}
         className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
         loading="lazy"
