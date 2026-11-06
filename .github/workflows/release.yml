@@ -25,6 +25,10 @@ jobs:
       - run: npm run build:pages
       - run: npm run export:project
       - run: npm run export:website
+      - name: Verify project archive independently
+        run: npm run verify:7z -- "$(find release-samples -maxdepth 1 -name '*-project-*.7z' -print -quit)" project
+      - name: Verify website archive independently
+        run: npm run verify:7z -- "$(find release-samples -maxdepth 1 -name '*-website-*.7z' -print -quit)" website
       - uses: actions/upload-artifact@v7
         with:
           name: rhizomaybor-web-release
@@ -78,4 +82,5 @@ jobs:
             Rhizomaybor v0.5.0 stable release.
 
             The release includes genuine 7z editable-project and publishable-website archives, SHA-256 checksums, and the Windows desktop installer. CI, CodeForge, desktop packaging and GitHub Pages deployment passed before publication. Review the repository test report and known limitations for the verified scope.
+
 

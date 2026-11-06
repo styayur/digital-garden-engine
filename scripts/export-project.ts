@@ -23,6 +23,11 @@ async function main() {
   const plan = await createExportPlan(project, mode, sanitizeServerHtml);
   const archive = await create7zArchive(plan.files, plan.suggestedFilename);
   fs.mkdirSync(outputDirectory, { recursive: true });
+  for (const existing of fs.readdirSync(outputDirectory)) {
+    if (existing.includes(`-${mode}-`) && (existing.endsWith('.7z') || existing.endsWith('.sha256'))) {
+      fs.rmSync(path.join(outputDirectory, existing), { force: true });
+    }
+  }
   const archivePath = path.join(outputDirectory, plan.suggestedFilename);
   fs.writeFileSync(archivePath, archive);
   fs.writeFileSync(`${archivePath}.sha256`, `${createHash('sha256').update(archive).digest('hex')}  ${path.basename(archivePath)}\n`, 'utf8');
@@ -34,4 +39,5 @@ main().catch((error) => {
   console.error(error);
   process.exit(1);
 });
+
 
