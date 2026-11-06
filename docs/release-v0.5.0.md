@@ -2,6 +2,11 @@
 
 Rhizomaybor turns the former Digital Garden Engine into a reusable visual website-building guide with a shared project model, static online editor, Tauri desktop shell and genuine 7z export.
 
+## Online editor
+
+- Editor: https://styayur.github.io/rhizomaybor/editor/
+- Garden: https://styayur.github.io/rhizomaybor/
+
 ## Highlights
 
 - Versioned `SiteProject` schema and explicit migrations.
@@ -26,15 +31,14 @@ Rhizomaybor turns the former Digital Garden Engine into a reusable visual websit
 
 ## Verification
 
-The implementation was tested with TypeScript, Node test runner, Vitest, Playwright, independent 7-Zip extraction, static artifact audits and Rust filesystem tests. See [test-report.md](test-report.md).
+CI, CodeForge, Windows desktop packaging and GitHub Pages deployment passed. The implementation was also tested with TypeScript, Node test runner, Vitest, Playwright, independent 7-Zip extraction, static artifact audits and Rust filesystem tests. See [test-report.md](test-report.md).
 
 ## Known limitations
 
 - No MDX component execution in standalone website export.
 - No unrestricted DOM/CSS/HTML editing.
 - No direct GitHub repository writes from the static editor.
-- No code signing certificate is included.
-- GitHub Pages deployment depends on repository Pages settings.
+- No code-signing certificate is included.
 - Unsupported HTML is preserved for source editing rather than guaranteed to render identically.
 
 ## Upgrade path

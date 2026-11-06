@@ -61,6 +61,8 @@ npm run dev
 
 Open `http://localhost:3000/editor/`.
 
+The verified public deployment is [styayur.github.io/rhizomaybor/editor](https://styayur.github.io/rhizomaybor/editor/).
+
 The online editor:
 
 - imports a `.json` project or a `.7z` project archive;
@@ -296,3 +298,4 @@ The original Markdown/MDX website remains supported through the legacy content c
 ## License
 
 Rhizomaybor is licensed under the Mozilla Public License 2.0. User-provided content and assets are not automatically relicensed by being edited or exported with Rhizomaybor. Third-party components retain their own licenses; see [docs/third-party-notices.md](docs/third-party-notices.md).
+

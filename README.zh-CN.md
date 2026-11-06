@@ -59,6 +59,8 @@ npm run dev
 
 打开 `http://localhost:3000/editor/`。
 
+已验证的公开部署地址：[styayur.github.io/rhizomaybor/editor](https://styayur.github.io/rhizomaybor/editor/)。
+
 在线编辑器支持：
 
 - 导入 `.json` 项目或 `.7z` 项目归档；
@@ -278,3 +280,4 @@ docs/                       架构、迁移、桌面、导出与用户指南
 ## 许可证
 
 Rhizomaybor 使用 Mozilla Public License 2.0。用户内容与资源不会仅因经过 Rhizomaybor 编辑或导出而自动改用该许可证。第三方组件保留各自许可证，见 [docs/third-party-notices.md](docs/third-party-notices.md)。
+
