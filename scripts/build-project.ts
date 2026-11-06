@@ -27,11 +27,12 @@ async function main() {
     fs.mkdirSync(path.dirname(target), { recursive: true });
     fs.writeFileSync(target, file.content);
   }
-  console.log(`Built ${plan.files.length} files for ${parsed.project.name}.`);
-  console.log(`Output: ${path.relative(ROOT, outputDirectory)}`);
+  process.stdout.write(`Built ${plan.files.length} files for ${parsed.project.name}.\n`);
+  process.stdout.write(`Output: ${path.relative(ROOT, outputDirectory)}\n`);
 }
 
 main().catch((error) => {
   console.error(error);
   process.exit(1);
 });
+

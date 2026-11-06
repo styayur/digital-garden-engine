@@ -40,5 +40,6 @@ if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) 
   const port = Number(process.argv[3] ?? 4173);
   const mount = process.argv[4] ?? '';
   const server = createStaticServer(root, { mount });
-  server.listen(port, '127.0.0.1', () => console.log(`Serving ${path.resolve(root)}${mount ? ` at ${mount}` : ''} on http://127.0.0.1:${port}${mount}/`));
+  server.listen(port, '127.0.0.1', () => process.stdout.write(`Serving ${path.resolve(root)}${mount ? ` at ${mount}` : ''} on http://127.0.0.1:${port}${mount}/\n`));
 }
+

@@ -21,7 +21,7 @@ export function renderContentDocumentBody(
 }
 
 export function renderRichValue(value: unknown, format: string, sanitize: HtmlSanitizer) {
-  const source = typeof value === 'string' ? value : value == null ? '' : String(value);
+  const source = typeof value === 'string' ? value : value === null || value === undefined ? '' : String(value);
   return format === 'markdown' ? sanitize(markdownToHtml(source)) : sanitize(source);
 }
 
@@ -47,3 +47,4 @@ export function contentReadingMinutes(document: Pick<ContentDocument, 'format' |
 export function hasMdxComponents(body: string) {
   return /<[A-Z][A-Za-z0-9]*(?:\s|>|\/)/.test(body);
 }
+

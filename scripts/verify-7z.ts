@@ -22,4 +22,5 @@ for (const relative of forbidden) {
 }
 const home = path.join(output, 'index.html');
 if (expectedMode === 'website' && !fs.existsSync(home)) throw new Error('Website archive has no index.html');
-console.log(`7z round-trip passed: ${path.basename(archivePath)} -> ${output}`);
+process.stdout.write(`7z round-trip passed: ${path.basename(archivePath)} -> ${output}\n`);
+

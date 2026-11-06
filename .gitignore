@@ -36,3 +36,5 @@ Thumbs.db
 # Desktop build output
 src-tauri/target/
 src-tauri/gen/
+.codeforge/artifacts/
+

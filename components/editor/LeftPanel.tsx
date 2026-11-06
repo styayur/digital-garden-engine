@@ -43,7 +43,7 @@ export function LeftPanel({ project, pageId, selection, onPage, onSelect, onAddC
   return (
     <aside className="flex h-full w-[286px] shrink-0 flex-col border-r border-line bg-bg/95">
       <div className="grid grid-cols-2 border-b border-line p-1">
-        <button type="button" data-testid="left-pages-tab" onClick={() => setTab('pages')} className={cn('rounded px-2 py-2 font-mono text-[9px] uppercase tracking-[0.16em]', tab === 'pages' ? 'bg-accent/15 text-accent' : 'text-muted')}>Pages & layout</button>
+        <button type="button" data-testid="left-pages-tab" onClick={() => setTab('pages')} className={cn('rounded px-2 py-2 font-mono text-[9px] uppercase tracking-[0.16em]', tab === 'pages' ? 'bg-accent/15 text-accent' : 'text-muted')}>Pages and layout</button>
         <button type="button" data-testid="left-content-tab" onClick={() => setTab('content')} className={cn('rounded px-2 py-2 font-mono text-[9px] uppercase tracking-[0.16em]', tab === 'content' ? 'bg-accent/15 text-accent' : 'text-muted')}>Content</button>
       </div>
 
@@ -90,3 +90,4 @@ export function LeftPanel({ project, pageId, selection, onPage, onSelect, onAddC
     </aside>
   );
 }
+

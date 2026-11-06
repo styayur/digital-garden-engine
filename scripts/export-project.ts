@@ -27,10 +27,11 @@ async function main() {
   fs.writeFileSync(archivePath, archive);
   fs.writeFileSync(`${archivePath}.sha256`, `${createHash('sha256').update(archive).digest('hex')}  ${path.basename(archivePath)}\n`, 'utf8');
   fs.writeFileSync(path.join(outputDirectory, `rhizomaybor-${mode}-manifest.json`), `${JSON.stringify(plan.manifest, null, 2)}\n`, 'utf8');
-  console.log(`Wrote ${archivePath} (${archive.byteLength} bytes) with ${plan.files.length} files.`);
+  process.stdout.write(`Wrote ${archivePath} (${archive.byteLength} bytes) with ${plan.files.length} files.\n`);
 }
 
 main().catch((error) => {
   console.error(error);
   process.exit(1);
 });
+

@@ -299,4 +299,5 @@ const project: SiteProject = siteProjectSchema.parse({
 
 fs.mkdirSync(path.dirname(output), { recursive: true });
 fs.writeFileSync(output, `${JSON.stringify(project, null, 2)}\n`, 'utf8');
-console.log(`Wrote ${path.relative(ROOT, output)} with ${documents.length} documents and ${pages.length} pages.`);
+process.stdout.write(`Wrote ${path.relative(ROOT, output)} with ${documents.length} documents and ${pages.length} pages.\n`);
+

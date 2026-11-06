@@ -25,7 +25,7 @@ function escapeHtml(value: string) {
 }
 
 function attr(value: unknown) {
-  return escapeHtml(typeof value === 'string' ? value : value == null ? '' : String(value));
+  return escapeHtml(typeof value === 'string' ? value : value === null || value === undefined ? '' : String(value));
 }
 
 function assetMap(project: SiteProject) {
@@ -320,3 +320,4 @@ export async function buildStandaloneSite(
 
   return { files, includedDocuments, excludedDocuments };
 }
+

@@ -13,4 +13,5 @@ const result = validateProject(parsed.project, { forExport: 'website' });
 for (const warning of result.warnings) console.warn(`warning ${warning.path}: ${warning.message}`);
 for (const error of result.errors) console.error(`error ${error.path}: ${error.message}`);
 if (!result.valid) process.exit(1);
-console.log(`Project valid: ${parsed.project.pages.length} pages, ${parsed.project.contentDocuments.length} documents, ${parsed.project.assets.length} assets.`);
+process.stdout.write(`Project valid: ${parsed.project.pages.length} pages, ${parsed.project.contentDocuments.length} documents, ${parsed.project.assets.length} assets.\n`);
+

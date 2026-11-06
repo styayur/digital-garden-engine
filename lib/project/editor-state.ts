@@ -198,7 +198,7 @@ export function addComponent(
   const component = createComponent(type);
   const definition = COMPONENT_BY_TYPE.get(type);
   if (!definition?.allowedLayouts.includes(section.layout)) return { project };
-  const at = index == null ? section.components.length : Math.max(0, Math.min(index, section.components.length));
+  const at = index === null || index === undefined ? section.components.length : Math.max(0, Math.min(index, section.components.length));
   const components = [...section.components];
   components.splice(at, 0, component);
   return {
@@ -371,3 +371,4 @@ export function addContentDocument(project: SiteProject, title = 'Untitled docum
     documentId: id,
   };
 }
+
