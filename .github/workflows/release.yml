@@ -73,8 +73,9 @@ jobs:
         with:
           files: release-files/**/*
           generate_release_notes: true
-          prerelease: true
+          prerelease: false
           body: |
-            Rhizomaybor v0.5.0 release candidate.
+            Rhizomaybor v0.5.0 stable release.
 
-            The release includes genuine 7z editable-project and publishable-website archives, SHA-256 checksums, and the Windows desktop installer. Review the repository test report and known limitations before treating this as a stable production release.
+            The release includes genuine 7z editable-project and publishable-website archives, SHA-256 checksums, and the Windows desktop installer. CI, CodeForge, desktop packaging and GitHub Pages deployment passed before publication. Review the repository test report and known limitations for the verified scope.
+
