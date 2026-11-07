@@ -73,7 +73,7 @@ jobs:
           cd release-files
           find . -maxdepth 1 -type f ! -name '*sha256sums.txt' ! -name '*.sha256' -printf '%f\n' | sort | xargs sha256sum > rhizomaybor-0.5.0-sha256sums.txt
       - name: Publish GitHub Release
-        uses: softprops/action-gh-release@v3
+        uses: softprops/action-gh-release@8a0cd651e5b2365bd640854a3fa5dfc70e4875f3
         with:
           files: release-files/**/*
           generate_release_notes: true
